@@ -45,15 +45,17 @@ function Search() {
     }, [query]);
 
     const updateSearch = e => {
-        setSearch(e.target.value)
-        console.log(search)
+        setSearch(e.target.value);
+        console.log(search);
     }
 
     const getSearch = e => {
         e.preventDefault();
-        setQuery(search)
-        setSearch("")
+        setQuery(search);
+        setSearch("");
     }
+
+
 
     return (
         <>
@@ -61,7 +63,7 @@ function Search() {
     <main className="outer-content-container-search">
         <section className="inner-content-container-search">
             <div className="content-container-search1">
-                <h5>Recipes Search page</h5>
+                <h2>Recipes Search page</h2>
                 <p>search her for you best recipes</p>
             </div>
             {error && <p>Something went wrong while retrieving the data</p>}

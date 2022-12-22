@@ -1,3 +1,17 @@
+/*////////////////////////
+    Table of Contents
+    1. Global Styles
+    2. Typography
+    3. Layout
+        3.1 Reusables
+        3.2 Other
+    4. Areas
+        4.1 Header
+        4.2 Introduction
+        etc.
+    5. Media Queries
+////////////////////////*/
+/* ------------------------------- 1. Global Styles -------------------------------- */
 @import url('https://fonts.googleapis.com/css2?family=Hepta+Slab:wght@300;500;600;700;800&family=Roboto:wght@400;500;700&display=swap');
 
 * {
@@ -6,18 +20,8 @@
     box-sizing: border-box;
 }
 
-/*root colors voor the app*/
-:root {
-    --primary: #87ED38;
-    --secondary: #25E243;
-    --secondary-a: #027902;
-    --secondary-dark: #5A5656;
-    --secondary-light: #FBF9F9;
-    --black: #292929;
-    --white: #FFFFFF;
-}
 
-
+/* ------------------------------- 2. Typography ----------------------------------- */
 body {
     font-family: 'Roboto Condensed', sans-serif;
     font-weight: 600;
@@ -44,6 +48,29 @@ h2 {
 h3 {
     font-size: 24px;
 }
+
+
+/* ------------------------------- 3. Layout --------------------------------------- */
+/* --------------- 3.1 Reusables ----------------------- */
+/*root colors voor the app*/
+:root {
+    --primary: #87ED38;
+    --secondary: #25E243;
+    --secondary-a: #027902;
+    --secondary-dark: #5A5656;
+    --secondary-light: #FBF9F9;
+    --black: #292929;
+    --white: #FFFFFF;
+}
+/* --------------- 3.2 Other --------------------------- */
+.logo {
+    width: 250px;
+    position: absolute;
+    top: 0;
+    left:0;
+}
+
+/* ------------------------------- 4. Areas ---------------------------------------- */
 
 .outer-content-container {
     width: 100%;
@@ -87,9 +114,15 @@ Hij mag krimpen als het scherm minder breed wordt, maar niet groeien als er meer
     padding: 35px 0;
 }
 
-.logo {
-    width: 250px;
-    position: absolute;
-    top: 0;
-    left:0;
-}
+
+
+
+
+
+
+
+/* --------------- 4.1 Header ------------------------- */
+
+/* --------------- 4.2 Introduction ------------------- */
+
+/* ------------------------------- 5. Media Queries -------------------------------- */
