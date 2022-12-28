@@ -2,10 +2,12 @@ import React, {useEffect, useState} from 'react';
 import "./Search.css"
 import axios from "axios";
 import SearchCard from "../../components/search-card/SearchCard";
-// import Background1 from "src/assets/search-page.jpg"
+import Button from "../../components/button/Button";
 
-const APP_ID = "id=08659f69&app"
-const APP_KEY = "key=%2013cd3b413ae7c5546cc09ef8a8590c71"
+
+
+const APP_ID = "08659f69"
+const APP_KEY = "2013cd3b413ae7c5546cc09ef8a8590c71"
 
 function Search() {
     const [recipes, setRecipes] = useState([]);
@@ -22,7 +24,7 @@ function Search() {
 
             try {
                 toggleError(false);
-                const data = await axios.get(`https://api.edamam.com/api/recipes/v2?type=public&q=${query}&app_${APP_ID}_${APP_KEY}`)
+                const data = await axios.get(`https://api.edamam.com/api/recipes/v2?type=public&q=${query}&app_id=${APP_ID}&app_key=%${APP_KEY}`)
                 console.log(data.data.hits)
                 setRecipes(data.data.hits)
 
@@ -69,7 +71,8 @@ function Search() {
             {error && <p>Something went wrong while retrieving the data</p>}
             {loading && <p>we are loading the data for you</p>}
                 <div className="content-container-search2">
-                    <form onSubmit={getSearch} className="search-form">
+                    <form onSubmit={getSearch} >
+                        <div className="form-item">
                         <input className="search-bar"
                             type="text"
                             name="search"
@@ -77,13 +80,19 @@ function Search() {
                             onChange={updateSearch}
                             placeholder="search her for you recipes "
                         />
-                   <span>
-                    <button className="search-button"
 
-                        type="submit">
-                        Search
-                    </button>
-                   </span>
+                      <Button
+                       name="search-button"
+                       type="submit"
+                       children="Search"
+                       />
+                        </div>
+                    {/*<button className="search-button"*/}
+
+                    {/*    type="submit">*/}
+                    {/*    Search*/}
+                    {/*</button>*/}
+
                     </form>
 
                 </div>

@@ -5,7 +5,7 @@ import RoundCalories from "../../helpers/roundCalories";
 function SearchCard({title, calories, image}) {
     return (
         <div className= "container-search-card">
-            <p>{title}</p>
+            <h6>{title}</h6>
             <p>{RoundCalories(calories)} Kcal</p>
             <img src={image} alt={title} />
         </div>

@@ -41,8 +41,11 @@ header li {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    flex-basis: 1200px;
+    flex-basis: 780px;
     flex-wrap: wrap;
+
+
+/*    basis was hier 1200 780 proberen voor laptop */
 }
 
 .nav-container ul {
@@ -57,4 +60,8 @@ header li {
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
+}
+
+.ulh {
+    margin: 0 40px 0 80px;
 }

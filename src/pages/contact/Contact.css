@@ -1,0 +1,97 @@
+.outer-content-container-contact {
+
+    background: url("../../assets/background-contact.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+
+
+
+.outer-content-container-contact {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-grow: 1;
+    flex-basis: 1400px;
+    flex-wrap: wrap;
+    border: #de9bf1 solid 3px;
+}
+
+.inner-content-container-contact {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-basis: 1400px;
+    border: blue solid 3px;
+    flex-wrap: wrap;
+    width: 100vw;
+    height: 100vh;
+
+
+}
+
+.content-container-contact {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 300px;
+    border: #f61045 solid 3px;
+
+}
+/*Algemene formulier-styling*/
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    /*text-align: center;*/
+    background-color:var(--secondary-light);
+    padding: 5px;
+    max-width: 430px;
+    min-height: 280px;
+    border: solid 3px var(--primary);
+    border-radius: 25px;
+    box-shadow: .25rem .5rem 1rem 0 rgba(0, 0, 0, 0.1);
+}
+.contact-form a {
+    text-decoration: none;
+    font-size: 15px;
+
+}
+
+.contact-form label {
+    margin: 4px 0;
+    font-weight: bold;
+    padding: 10px;
+}
+
+.contact-form input {
+    width: 100%;
+    padding: 4px 8px;
+    margin: 6px 0;
+    border-radius: 25px;
+    border: solid 1px var(--primary) ;
+    position: relative;
+
+
+}
+.message-field {
+    border: solid 1px var(--primary);
+    border-radius: 25px;
+    padding: 8px;
+    width: 100%;
+}
+
+form p {
+    font-size: 14px;
+    padding:  60px 0  5px 0;
+    text-align: center;
+}
+.button-field {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
