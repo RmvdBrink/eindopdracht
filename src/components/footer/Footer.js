@@ -2,7 +2,7 @@ import React from 'react';
 import {NavLink, Link } from "react-router-dom";
 import "./Footer.css"
 
-function Footer(props) {
+function Footer() {
     return (
         <div className="footer">
             <ul className="ulf">

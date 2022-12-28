@@ -18,6 +18,7 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+
 }
 
 
@@ -25,7 +26,7 @@
 body {
     font-family: 'Roboto Condensed', sans-serif;
     font-weight: 600;
-    color: var(--black);
+    color: var(--secondary-dark);
 }
 
 
@@ -46,21 +47,35 @@ h2 {
 }
 
 h3 {
+    font-size: 34px;
+}
+h4 {
+    font-size: 28px;
+
+}
+h5 {
     font-size: 24px;
+    color: var(--black);
+    align-self: center;
 }
 
-
+h6 {
+    font-size: 16px;
+    color: var(--secondary-a);
+}
 /* ------------------------------- 3. Layout --------------------------------------- */
 /* --------------- 3.1 Reusables ----------------------- */
 /*root colors voor the app*/
 :root {
     --primary: #87ED38;
     --secondary: #25E243;
+    --secondary-logo: #9ecb3b;
     --secondary-a: #027902;
-    --secondary-dark: #5A5656;
+    --secondary-dark: #403838;
     --secondary-light: #FBF9F9;
     --black: #292929;
     --white: #FFFFFF;
+    /*#5A5656*/
 }
 /* --------------- 3.2 Other --------------------------- */
 .logo {
@@ -70,6 +85,9 @@ h3 {
     left:0;
 }
 
+form label {
+    font-family: 'Roboto Condensed', sans-serif ;
+}
 /* ------------------------------- 4. Areas ---------------------------------------- */
 
 .outer-content-container {

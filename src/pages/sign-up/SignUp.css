@@ -1,0 +1,91 @@
+.outer-content-container-sign-up {
+
+    background: url("../../assets/layered-waves-haikei.svg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+
+
+
+.outer-content-container-sign-up {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-grow: 1;
+    flex-basis: 1200px;
+    flex-wrap: wrap;
+    border: #de9bf1 solid 3px;
+}
+
+.inner-content-container-sign-up {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-basis: 1400px;
+    border: blue solid 3px;
+    flex-wrap: wrap;
+    width: 100vw;
+    height: 100vh;
+
+
+}
+
+.content-container-sign-up {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 200px;
+    border: #f61045 solid 3px;
+
+}
+/*Algemene formulier-styling*/
+.sign-up-form {
+    display: flex;
+    flex-direction: column;
+    /*text-align: center;*/
+    background-color:var(--secondary-light);
+    padding: 32px;
+    max-width: 430px;
+    min-height: 300px;
+    border: solid 3px var(--primary);
+    border-radius: 25px;
+    box-shadow: .25rem .5rem 1rem 0 rgba(0, 0, 0, 0.1);
+}
+.sign-up-form a {
+    text-decoration: none;
+    font-size: 15px;
+
+}
+
+.sign-up-form label {
+    margin: 4px 0;
+    font-weight: bold;
+    padding: 10px;
+}
+
+.sign-up-form input {
+    width: 100%;
+    padding: 4px 8px;
+    margin: 6px 0;
+    border-radius: 25px;
+    border: solid 1px var(--primary) ;
+    position: relative;
+
+}
+
+
+form p {
+    font-size: 14px;
+    padding:  60px 0  5px 0;
+    text-align: center;
+}
+.button-field {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+

@@ -12,7 +12,6 @@
     flex-shrink: 1;
     flex-wrap: wrap;
     gap: 80px;
-    font-size: 20px;
     width: 100%;
     padding: 15px 0;
     text-align: center;
@@ -24,7 +23,8 @@ nav a:hover {
 
 .ulf > li > a {
     color: var(--secondary-dark);
-
-
+    font-size: 17px;
 }
+
+
 
