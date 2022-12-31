@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 // import SearchCard from "../../components/search-card/SearchCard";
 import axios from "axios";
 import Button from "../../components/button/Button";
+import "./Calculator.css"
 
 const APP_ID = "id=0c78e8a1&app"
 const APP_KEY = "key=d17f117cd5cfc21bccfac6a9560a352a"
@@ -9,7 +10,7 @@ const APP_KEY = "key=d17f117cd5cfc21bccfac6a9560a352a"
 function Calculator() {
 
 
-        const [calorie, setCalorie] = useState({});
+        const [calorie, setCalorie] = useState([]);
         const [search, setSearch] = useState("")
         const [error, toggleError] = useState(false);
         const [query, setQuery] = useState("")
@@ -25,7 +26,7 @@ function Calculator() {
 
                 try {
                     toggleError(false);
-                    const data = await axios.get(`https://api.edamam.com/api/nutrition-data?app_${APP_ID}_${APP_KEY}&nutrition-type=cooking&ingr=${query}`)
+                    const data = await axios.get(`https://api.edamam.com/api/nutrition-data?app_${APP_ID}_${APP_KEY}&nutrition-type=cooking&ingr=${query}`,{signal: controller.signal} )
                     console.log(data.data)
                     setCalorie(data.data)
                     // query
@@ -68,19 +69,19 @@ function Calculator() {
             <>
 
                 <div>
-                    <h1>Kcal calculator</h1>
+
                 </div>
                 {error && <p>Something went wrong while retrieving the data</p>}
                 {loading && <p>we are loading the data for you</p>}
-                <main className="outer-content-container-search">
-                    <section className="inner-content-container-search">
-                        <div className="content-container-search1">
-                            <h2>Kcal calculator page</h2>
+                <main className="outer-content-container-calculator">
+                    <section className="inner-content-container-calculator">
+                        <div className="content-container-calculator1">
+                            <h5>Kcal calculator page</h5>
                             <p>Our dishes always consist very healthy products.
                                 Do you still want to know how many kcal you take to balance your eating habits, enter them below.</p>
                         </div>
                         <form onSubmit={getSearch}>
-                        <div>
+                        <div className="content-container-calculator2">
                             <p>
                                 <textarea
                                     className="text-field-calculator"
@@ -88,13 +89,26 @@ function Calculator() {
                                     id="calculator"
                                     cols="30"
                                     rows="10"
+                                    value={search}
                                     onChange={updateSearch}
                                     placeholder="enter your product such as for example: 100 g chicken"
                                 ></textarea>
                             </p>
+                            <div className="content-container-calculator3">
+                                <Button name="calculator"
+                                        type="submit"
+                                        children="calculate"
+                                />
+                                {/*<Button*/}
+                                {/*    name="reset"*/}
+                                {/*    typte="onclick"*/}
+                                {/*    // clickHandler={fieldReset}*/}
+                                {/*    children="reset"*/}
+                                {/*/>*/}
+                            </div>
                             <div className="result-calculator">
-
-                                <div>
+                                <div className="outer-content-container-calculator4">
+                                <div className="content-container-calculator4">
                                     <table>
                                         <thead>
 
@@ -107,41 +121,27 @@ function Calculator() {
                                         </tr>
                                         </thead>
 
+                                        <tbody>
+                                        {Object.keys(calorie).length > 0 &&
+                                            <>
 
-                                                {calorie.data && calorie.data.map((calorie) => {
-                                                    return (
-                                                        <>
-                                                        <tbody key={calorie.calories}>
                                                         <tr>
-                                                <th>{calorie.ingredients[0].parsed[0].quantity}</th>
-                                                <th>{calorie.ingredients[0].parsed[0].measure}</th>
-                                                <th>{calorie.ingredients[0].parsed[0].foodMatch}</th>
-                                                <th>{calorie.calories}</th>
+                                                            <th>{calorie.ingredients[0].parsed[0].quantity}</th>
+                                                            <th>{calorie.ingredients[0].parsed[0].measure}</th>
+                                                            <th>{calorie.ingredients[0].parsed[0].foodMatch}</th>
+                                                            <th>{calorie.calories}</th>
 
                                                         </tr>
 
-                                                        </tbody>
-                                                        </>
-                                                )
+                                            </>
+                                        }
 
-                                                })}
-
-
+                                        </tbody>
                                     </table>
                                 </div>
 
                             </div>
-                            <Button name="calculator"
-                            type="submit"
-                            children="calculate"
-                            />
-                            <Button
-                            name="reset"
-                            typte="onclick"
-                            // clickHandler={fieldReset}
-                            children="reset"
-                            />
-
+                            </div>
                         </div>
                     </form>
                     </section>
@@ -152,3 +152,23 @@ function Calculator() {
     }
 
 export default Calculator;
+
+
+
+// async function analyzeRecipe() {
+//     try {
+//         const response = await axios.post('https://api.edamam.com/api/nutrition-details', {
+//             query: '10 oz butter',
+//         }, {
+//             headers: {
+//                 'x-app-id': '0c78e8a1',
+//                 'x-app-key': 'd17f117cd5cfc21bccfac6a9560a352a'
+//             }
+//         });
+//         console.log(response.data);
+//     } catch (error) {
+//         console.error(error);
+//     }
+// }
+//
+// analyzeRecipe();

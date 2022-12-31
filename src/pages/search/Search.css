@@ -1,13 +1,9 @@
-main {
+.outer-content-container-search {
     background: url("../../assets/search-page.jpg") no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-}
-
-
-.outer-content-container-search {
     display: flex;
     flex-direction: row;
     justify-content: center;

@@ -1,0 +1,69 @@
+.outer-content-container-work {
+    background: url("../../assets/background work-together.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-grow: 1;
+    flex-basis: 1400px;
+    flex-wrap: wrap;
+    border: #de9bf1 solid 3px;
+    font-weight: 500;
+
+}
+.outer-content-container-work h5 {
+    font-size: 20px;
+    padding: 20px 0;
+
+}
+
+.inner-content-container-work {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 580px;
+    border:  solid 1px var(--primary);
+    border-radius: 10px;
+    flex-wrap: wrap;
+    background-color: var(--background-color);
+}
+
+.content-container-work1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    flex-basis: 300px;
+    /*width: 506px;*/
+    flex-wrap: wrap;
+    /*border: #f61045 solid 3px;*/
+    text-align: center;
+    padding: 40px 0;
+    background-color: var(--background-color);
+}
+.content-container-work1 p {
+    padding: 15px 0;
+    margin: 5px 0;
+}
+.content-container-work2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 300px;
+    /*width: 506px;*/
+    flex-wrap: wrap;
+    /*border: #74ff24 solid 3px;*/
+    text-align: center;
+    background-color: var(--background-color);
+
+}
+.content-container-work2 p {
+    padding: 15px 0;
+    margin: 5px 0;
+}
+

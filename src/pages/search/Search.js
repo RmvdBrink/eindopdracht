@@ -24,7 +24,7 @@ function Search() {
 
             try {
                 toggleError(false);
-                const data = await axios.get(`https://api.edamam.com/api/recipes/v2?type=public&q=${query}&app_id=${APP_ID}&app_key=%${APP_KEY}`)
+                const data = await axios.get(`https://api.edamam.com/api/recipes/v2?type=public&q=${query}&app_id=${APP_ID}&app_key=%${APP_KEY}`,{signal: controller.signal})
                 console.log(data.data.hits)
                 setRecipes(data.data.hits)
 
