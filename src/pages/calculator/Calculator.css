@@ -1,0 +1,106 @@
+.outer-content-container-calculator {
+    background: url("../../assets/background-calculator.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.outer-content-container-calculator {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-grow: 1;
+    flex-basis: 1400px;
+    flex-wrap: wrap;
+    border: #de9bf1 solid 3px;
+}
+
+.inner-content-container-calculator {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-basis: 1400px;
+    border: blue solid 3px;
+    flex-wrap: wrap;
+}
+
+.content-container-calculator1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 300px;
+    border: #f61045 solid 3px;
+
+}
+.content-container-calculator1 h5 {
+    font-size: 40px;
+}
+.content-container-calculator2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 600px;
+    border: #74ff24 solid 2px;
+}
+
+#calculator {
+    border-radius: 5px;
+    border: solid 1px var(--secondary);
+}
+.content-container-calculator3 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-wrap: wrap;
+    flex-basis: 100px;
+    border: #073daf solid 3px;
+    text-align: center;
+
+}
+
+.content-container-calculator4 th{
+padding: 10px;
+    width: 100px;
+    text-align: center;
+    /*display: flex;*/
+    /*flex-direction: column;*/
+    /*justify-content: space-between;*/
+    /*align-items: center;*/
+    /*flex-grow: 0;*/
+    /*flex-shrink: 1;*/
+    /*flex-wrap: wrap;*/
+    /*flex-basis: 300px;*/
+    border: #f8d02e solid 3px;
+    /*text-align: center;*/
+
+}
+.outer-content-container-calculator4 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-wrap: wrap;
+    width:  400px;
+    height: 150px;
+    border:  solid 1px var(--secondary);
+    border-radius: 10px;
+    text-align: center;
+    background-color: var(--secondary-light);
+}
+
+.form-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-self: baseline;
+    flex-wrap: wrap;
+
+}

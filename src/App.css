@@ -67,15 +67,20 @@ h6 {
 /* --------------- 3.1 Reusables ----------------------- */
 /*root colors voor the app*/
 :root {
-    --primary: #87ED38;
+    --primary: #87ed38ba;
     --secondary: #25E243;
     --secondary-logo: #9ecb3b;
     --secondary-a: #027902;
     --secondary-dark: #403838;
     --secondary-light: #FBF9F9;
+    --background-color: #fbf9f9bf;
+    --primary-light-green: #f0fded;
+    --button-color: #b5f782;
     --black: #292929;
-    --white: #FFFFFF;
+    --white: #ffffff;
+    --error: #f62b11;
     /*#5A5656*/
+
 }
 /* --------------- 3.2 Other --------------------------- */
 .logo {
@@ -87,6 +92,10 @@ h6 {
 
 form label {
     font-family: 'Roboto Condensed', sans-serif ;
+}
+
+.errors {
+    color:var(--error) ;
 }
 /* ------------------------------- 4. Areas ---------------------------------------- */
 

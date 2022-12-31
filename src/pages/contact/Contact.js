@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 import "./Contact.css"
 import "../../App.css"
 import {useForm} from "react-hook-form";
+import InputComponent from "../../components/input component/InputComponent";
 
 
 function Contact() {
@@ -28,126 +29,116 @@ function Contact() {
                             <h5><strong>Contact us</strong> </h5>
                             <p>Welcome to our healthy recipes website! If you have any questions or suggestions, please don't hesitate to reach out to us using the contact form below. We are always looking for ways to improve and bring you the best healthy recipes and tips. Thank you for visiting!</p>
 
-                            <label htmlFor="firstname-field">
-                                Name:
-                                <input
-                                    type="text"
-                                    id="firstname-field"
-                                    name="name"
-                                    // value={email}
-                                    // onChange={(e) => setEmail(e.target.value)}
-                                    placeholder="Enter your first name here."
-                                    {...register("name",{
-                                        required: {
-                                            value: true,
-                                            message:"this field is required",
-                                        },
-                                        minLength: {
-                                            value: 2,
-                                            message:"name must be at least 2 characters long",
-                                        },
-                                        maxLength: {
-                                            value: 35,
-                                            message:"username cannot be more than 35 characters long",
-                                        },
 
-                                    })}
-                                />
-                                {errors.name && <p>{errors.name.message}</p> }
-                            </label>
-                            <label htmlFor="last-name-field">
-                                Username:
-                                <input
-                                    type="text"
-                                    id="last-name-field"
-                                    name="lastname"
-                                    // value={email}
-                                    // onChange={(e) => setEmail(e.target.value)}
-                                    placeholder="Enter your last name here."
-                                    {...register("last-name",{
-                                        required: {
-                                            value: true,
-                                            message:"this field is required",
-                                        },
-                                        minLength: {
-                                            value: 4,
-                                            message:"username must be at least 8 characters long",
-                                        },
-                                        maxLength: {
-                                            value: 35,
-                                            message:"username cannot be more than 35 characters long",
-                                        },
+                            <InputComponent
+                              inputId="firstname"
+                              children="Name:"
+                              inputType="text"
+                              inputName="name"
+                              inputPlaceholder="Enter your first name here."
+                              validationRules={{
+                                  required: {
+                                      value: true,
+                                      message:"this field is required",
+                                  },
+                                  minLength: {
+                                      value: 2,
+                                      message:"name must be at least 2 characters long",
+                                  },
+                                  maxLength: {
+                                      value: 35,
+                                      message:"username cannot be more than 35 characters long",
+                                  },
 
-                                    })}
-                                />
-                                {errors.lastname && <p>{errors.lastname.message}</p> }
-                            </label>
-                            <label htmlFor="phone-number-field">
-                                Phone number:
-                                <input
-                                    type="text"
-                                    id="phone-number-field"
-                                    name="number"
-                                    // value={email}
-                                    // onChange={(e) => setEmail(e.target.value)}
-                                    placeholder="Enter your phone number here."
-                                    {...register("number",{
-                                        required: {
-                                            value: true,
-                                            message:"this field is required",
-                                        },
-                                        minLength: {
-                                            value: 10,
-                                            message:"phone number  must be at least 10 characters long",
-                                        },
-                                        maxLength: {
-                                            value: 18,
-                                            message:"phone number cannot be more than 16 characters long",
-                                        },
+                              }}
+                              register={register}
+                              errors={errors}
+                            />
 
-                                    })}
-                                />
-                                {errors.number && <p>{errors.number.message}</p> }
-                            </label>
-                            <label htmlFor="email-field">
-                                Emailadres:
-                                <input
-                                    type="text"
-                                    id="email-field"
-                                    name="email"
-                                    // value={email}
-                                    // onChange={(e) => setEmail(e.target.value)}
-                                    placeholder="....@novi-education.nl"
-                                    {...register("email",{
-                                        required: {
-                                            value: true,
-                                            message:"this field is required",
-                                        },
-                                        minLength: {
-                                            value: 8,
-                                            message:"Email must be at least 8 characters long",
-                                        },
-                                        maxLength: {
-                                            value: 35,
-                                            message:"Email cannot be more than 35 characters long",
-                                        },
-                                        validate: (value) => value.includes("@")
-                                            || 'Email must contain an @',
-                                    })}
-                                />
-                                {errors.email && <p>{errors.email.message}</p> }
-                            </label>
+                            <InputComponent
+                                inputId="last-name"
+                                children="Lastname:"
+                                inputType="text"
+                                inputName="lastname"
+                                inputPlaceholder="Enter your last name here."
+                                validationRules={{
+                                    required: {
+                                        value: true,
+                                        message:"this field is required",
+                                    },
+                                    minLength: {
+                                        value: 4,
+                                        message:"lastname must be at least 8 characters long",
+                                    },
+                                    maxLength: {
+                                        value: 35,
+                                        message:"lastname cannot be more than 35 characters long",
+                                    },
+
+                                }}
+                                register={register}
+                                errors={errors}
+                            />
+
+                            <InputComponent
+                                inputId="phone-number"
+                                children="Phone number:"
+                                inputType="tel"
+                                inputName="number"
+                                inputPlaceholder="Enter your phone number here."
+                                validationRules={{
+                                    required: {
+                                        value: true,
+                                        message:"this field is required",
+                                    },
+                                    minLength: {
+                                        value: 10,
+                                        message:"phone number  must be at least 10 characters long",
+                                    },
+                                    maxLength: {
+                                        value: 18,
+                                        message:"phone number cannot be more than 16 characters long",
+                                    },
+
+                                }}
+                                register={register}
+                                errors={errors}
+                            />
+
+                            <InputComponent
+                                inputId="email"
+                                children="E-mailadres:"
+                                inputType="text"
+                                inputName="email"
+                                inputPlaceholder="....@novi-education.nl"
+                                validationRules={{
+                                    required: {
+                                        value: true,
+                                        message:"this field is required",
+                                    },
+                                    minLength: {
+                                        value: 8,
+                                        message:"Email must be at least 8 characters long",
+                                    },
+                                    maxLength: {
+                                        value: 35,
+                                        message:"Email cannot be more than 35 characters long",
+                                    },
+                                    validate: (value) => value.includes("@")
+                                        || 'Email must contain a @',
+                                }}
+                                register={register}
+                                errors={errors}
+                            />
 
                             <label htmlFor="message-field">
-                                Message :
+                                Message:
                                 <textarea  className="message-field"
                                     id="message-field"
                                     name="message_field"
-                                    rows="5"
+                                    rows="7"
                                     cols="43"
-                                    // value={password}
-                                    // onChange={(e) => setPassword(e.target.value)}
-                                    placeholder="Enter your comments her. "
+                                    placeholder="Enter your comments here. "
                                     {...register("message",{
                                         required: {
                                             value: true,
@@ -164,22 +155,19 @@ function Contact() {
 
                                     })}
                                 />
-                                {errors.message && <p>{errors.message.message}</p> }
+                                {errors.message && <p className="errors">{errors.message.message}</p> }
                             </label>
                             <span className="button-field">
                         <Button
                             type="submit"
                             name="sign-in-button"
-                            children="Sign in"
+                            children="Submit"
                         />
                         </span>
-                            {/*<button*/}
-                            {/*    className="sign-in-button"*/}
-                            {/*    type="submit"*/}
-                            {/*>Sign in</button>*/}
+
 
                             <p>finished filling out your contact form click   <Link to="/">here</Link> to return to our homepage</p>
-                            <p>forgot you password</p>
+                            <p className="password-p">forgot you password</p>
                         </form>
                     </article>
 

@@ -1,0 +1,112 @@
+.outer-content-container-disclaimer {
+    background: url("../../assets/background work-together.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-grow: 1;
+    flex-basis: 1400px;
+    flex-wrap: wrap;
+    border: #de9bf1 solid 3px;
+    font-weight: 500;
+
+}
+.outer-content-container-disclaimer h5 {
+    font-size: 20px;
+    padding: 20px 0;
+
+}
+
+.inner-content-container-disclaimer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 580px;
+    border:  solid 1px var(--primary);
+    border-radius: 10px;
+    flex-wrap: wrap;
+    background-color: var(--background-color);
+}
+
+.content-container-disclaimer1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    flex-basis: 300px;
+    /*width: 506px;*/
+    flex-wrap: wrap;
+    /*border: #f61045 solid 3px;*/
+    text-align: center;
+    padding: 40px 0;
+    background-color: var(--background-color);
+}
+.content-container-disclaimer1 p {
+    padding: 15px 0;
+    margin: 5px 0;
+}
+.content-container-disclaimer2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 300px;
+    /*width: 506px;*/
+    flex-wrap: wrap;
+    /*border: #74ff24 solid 3px;*/
+    text-align: center;
+    background-color: var(--background-color);
+
+}
+.content-container-disclaimer2 p {
+    padding: 15px 0;
+    margin: 5px 0;
+}
+.content-container-disclaimer2 li {
+    list-style: none;
+
+}
+
+.content-container-disclaimer3 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 300px;
+    /*width: 506px;*/
+    flex-wrap: wrap;
+    /*border: #74ff24 solid 3px;*/
+    text-align: center;
+    background-color: var(--background-color);
+
+}
+.content-container-disclaimer3 p {
+    padding: 15px 0;
+    margin: 5px 0;
+}
+.content-container-disclaimer4 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 300px;
+    /*width: 506px;*/
+    flex-wrap: wrap;
+    /*border: #74ff24 solid 3px;*/
+    text-align: center;
+    background-color: var(--background-color);
+
+}
+.content-container-disclaimer4 p {
+    padding: 15px 0;
+    margin: 5px 0;
+}
+
+.content-container-disclaimer4 li {
+    list-style: none;
+
+}
