@@ -65,12 +65,15 @@ function Search() {
     <main className="outer-content-container-search">
         <section className="inner-content-container-search">
             <div className="content-container-search1">
+
                 <h2>Recipes Search page</h2>
                 <p>search her for you best recipes</p>
+
             </div>
             {error && <p>Something went wrong while retrieving the data</p>}
             {loading && <p>we are loading the data for you</p>}
                 <div className="content-container-search2">
+
                     <form onSubmit={getSearch} >
                         <div className="form-item">
                         <input className="search-bar"

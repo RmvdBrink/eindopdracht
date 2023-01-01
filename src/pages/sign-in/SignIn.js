@@ -27,7 +27,7 @@ function SignIn() {
 
                     <form onSubmit={handleSubmit(handleFormSubmit)} className="sign-in-form">
                         <h5><strong>Sign In</strong> </h5>
-                        <p>please enter your emailadres and password</p>
+                        <p>please enter your e-mailadres and password</p>
 
                         <InputComponent
                             inputId="email"
@@ -56,7 +56,7 @@ function SignIn() {
                         />
                         <InputComponent
                             inputId="password"
-                            children="password"
+                            children="Password"
                             inputType="password"
                             inputName="password"
                             inputPlaceholder="password"
@@ -95,7 +95,7 @@ function SignIn() {
                         <p>forgot you password</p>
                     </form>
                     </fieldset>
-                        {/*<p>Heb je nog geen account? <Link to="/signup">Registreer</Link> je dan eerst.</p>*/}
+
 
 
                 </div>

@@ -30,7 +30,7 @@ function SignUp() {
                         <p>please enter your emailadres, username and password</p>
                         <InputComponent
                             inputId="email"
-                            children="e-mailadres:"
+                            children="E-mailadres:"
                             inputType="text"
                             inputName="email"
                             inputPlaceholder="....@novi-education.nl"
@@ -55,7 +55,7 @@ function SignUp() {
                         />
                         <InputComponent
                             inputId="username"
-                            children="username:"
+                            children="Username:"
                             inputType="text"
                             inputName="username:"
                             inputPlaceholder="FitFoodie"
@@ -79,7 +79,7 @@ function SignUp() {
 
                         <InputComponent
                             inputId="password"
-                            children="password"
+                            children="Password"
                             inputType="password"
                             inputName="password"
                             inputPlaceholder="password"
@@ -109,7 +109,7 @@ function SignUp() {
                         <Button
                             type="submit"
                             name="sign-in-button"
-                            children="Sign in"
+                            children="Sign up"
                         />
                         </span>
 
