@@ -38,6 +38,9 @@
     flex-basis: 600px;
     border: #74ff24 solid 3px;
 }
+
+
+
 .content-container-search3 {
     display: flex;
     flex-direction: row;
@@ -49,6 +52,7 @@
     flex-basis: 500px;
     border: #073daf solid 3px;
     text-align: center;
+    background-color: var(--background-color);
 
 }
 
