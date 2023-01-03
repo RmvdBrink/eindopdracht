@@ -4,8 +4,8 @@ import axios from "axios";
 import Button from "../../components/button/Button";
 import "./Calculator.css"
 
-const APP_ID = "id=0c78e8a1&app"
-const APP_KEY = "key=d17f117cd5cfc21bccfac6a9560a352a"
+const APP_ID = "0c78e8a1&app"
+const APP_KEY = "d17f117cd5cfc21bccfac6a9560a352a"
 
 function Calculator() {
 
@@ -26,17 +26,18 @@ function Calculator() {
 
                 try {
                     toggleError(false);
-                    const data = await axios.get(`https://api.edamam.com/api/nutrition-data?app_${APP_ID}_${APP_KEY}&nutrition-type=cooking&ingr=${query}`,{signal: controller.signal} )
+                    const data = await axios.get(`https://api.edamam.com/api/nutrition-data?app_id=${APP_ID}_key=${APP_KEY}&nutrition-type=cooking&ingr=${query}`,{signal: controller.signal} )
                     console.log(data.data)
                     setCalorie(data.data)
                     // query
                 } catch (e) {
-
+                    // console.error(e)
                     if (axios.isCancel(e)) {
                         console.log("The axios request was cancelled")
+                        toggleError(true)
                     }  else {
                         console.error(e)
-                        toggleError(true)
+
                     }
                 }
                 toggleLoading(false)

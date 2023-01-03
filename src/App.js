@@ -15,8 +15,11 @@ import SearchCard from "./components/search-card/SearchCard";
 import CalculatorCard from "./components/calculator-card/CalculatorCard";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
+import RecipeCard from "./components/Recipe-card/RecipeCard";
 import Logo from "./assets/logo-bewerkt.png"
 import React from "react";
+import RecipesPage from "./pages/recipes/RecipesPage";
+
 
 
 function App() {
@@ -29,13 +32,14 @@ function App() {
         <Routes>
           <Route path="/" element={<Home/>}/>
           <Route path="/kcal-calculator" element={<Calculator/>}/>
-            <Route path="/kcal-calculator/card/id" element={<CalculatorCard/>}/>
+          <Route path="/kcal-calculator/card/id" element={<CalculatorCard/>}/>
           <Route path="/contact" element={<Contact/>}/>
           <Route path="/disclaimer" element={<Disclaimer/>}/>
           <Route path="/f-a-q" element={<Faq/>}/>
           <Route path="/favourite" element={<Favourite/>}/>
           <Route path="/search" element={<Search/>}/>
-            <Route path="/search-card/id" element={<SearchCard/>}/>
+          <Route path="/recipes-page/:id" element={<RecipesPage/>}/>
+          <Route path="/search-card/:id" element={<SearchCard/>}/>
           <Route path="/sign-in" element={<SignIn/>}/>
           <Route path="/sign-up" element={<SignUp/>}/>
           <Route path="/work-together" element={<WorkTogether/>}/>

@@ -1,7 +1,7 @@
 import React from 'react';
 import "./InputComponent.css"
 
-function InputComponent({inputId,children, inputName, inputType, validationRules,inputPlaceholder, register, errors,  }) {
+function InputComponent({inputId,children, inputName, value, changeHandler, inputType, validationRules,inputPlaceholder, register, errors,  }) {
     return (
         <>
             <label htmlFor={`${inputId}-field`}>
@@ -11,6 +11,8 @@ function InputComponent({inputId,children, inputName, inputType, validationRules
                     id={`${inputId}-field`}
                     name={inputName}
                     placeholder={inputPlaceholder}
+                    value={value}
+                    onChange={changeHandler}
                     {...register(inputName, validationRules)}
                 />
             </label>
@@ -22,5 +24,3 @@ function InputComponent({inputId,children, inputName, inputType, validationRules
 
 export default InputComponent;
 
-// value={email}
-// onChange={(e) => setEmail(e.target.value)}

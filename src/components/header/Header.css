@@ -1,9 +1,6 @@
 
-a {
-  color: var(--primary);
-    font-size: 22px;
-    list-style: none;
-    text-decoration-line: none;
+.header a {
+
 }
 header a:hover,
 nav a:hover {
@@ -27,25 +24,30 @@ header li {
     justify-content: space-around;
     flex-basis: 780px;
     flex-wrap: wrap;
-
+    color: var(--primary);
+    font-size: 22px;
+    list-style: none;
+    text-decoration-line: none;
 
 /*    basis was hier 1200 780 proberen voor laptop */
 }
 
-.nav-container ul {
+.nav-container li > a {
     list-style: none;
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
+    color: var(--primary);
+    font-size: 22px;
+    text-decoration-line: none;
 }
 
-.nav-container li {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: center;
-}
 
-.ulh {
+
+.ulh li > a {
     margin: 0 40px 0 80px;
+    color: var(--primary);
+    font-size: 22px;
+    list-style: none;
+    text-decoration-line: none;
 }

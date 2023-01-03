@@ -1,12 +1,13 @@
 import React from 'react';
-import SearchCardCss from "./SearchCard.css"
-import RoundCalories from "../../helpers/roundCalories";
+import "./SearchCard.css"
+// import RoundCalories from "../../helpers/roundCalories";
+import {Link} from "react-router-dom";
 
-function SearchCard({title, calories, image}) {
+function SearchCard({title, image, id}) {
     return (
         <div className= "container-search-card">
-            <h6>{title}</h6>
-            <p>{RoundCalories(calories)} Kcal</p>
+            <h6><Link to= {`/recipes-page/${id}`}>{title}</Link></h6>
+            {/*<p>{RoundCalories(calories)} Kcal</p>*/}
             <img src={image} alt={title} />
         </div>
     );
