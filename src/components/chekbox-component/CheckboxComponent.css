@@ -1,0 +1,25 @@
+.checkbox-search2-box{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
+    color: var(--primary);
+    margin: 0;
+
+}
+
+.checkbox-search2-box label{
+    padding: 6px 6px 6px 30px;
+    width: 100vw;
+}
+
+.checkbox-search2-box input{
+    display: flex;
+    align-items: center;
+    padding: 2em 4em;
+    width: 100%;
+    color: #de9bf1;
+}
+input#gluten-free {
+    color: #073daf;
+}

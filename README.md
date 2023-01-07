@@ -16,3 +16,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 
 ### `npm install react-hook-form`
+
+
+
+### `npm install jwt-decode`
