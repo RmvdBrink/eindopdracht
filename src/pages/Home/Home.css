@@ -86,6 +86,7 @@
 .text-container-home2 a {
     font-size: 16px;
     text-decoration: none;
+    color: var(--primary);
 }
 .text-container-home2 {
     display: flex;
@@ -135,11 +136,13 @@
     text-align: center;
     flex-basis: 690px;
     padding: 40px 0;
+
     /*border: solid 1px gold;*/
 }
 .text-container-home3 a {
     font-size: 16px;
     text-decoration: none;
+    color: var(--primary);
 }
 .img-container-home-3 {
     display: flex;
