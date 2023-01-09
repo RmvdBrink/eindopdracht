@@ -27,7 +27,7 @@ function Search() {
 
     const allergenToExclude = selectedAllergen.join(",");
     const dietsToExclude = selectedDiet.join(",");
-
+    //function that requests min and max kcal for recpten filter
     const calorieRange = ("calories=")
     const combineMinMaxCalorie = minCalories.toString().concat('-',  maxCalories.toString());
     let totalCalorieRange = calorieRange.concat(combineMinMaxCalorie)
