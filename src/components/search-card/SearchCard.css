@@ -1,7 +1,13 @@
 .container-search-card {
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
    align-items: center;
+    flex-basis: 300px;
+    flex-wrap: wrap;
+    flex-shrink: 2;
+    gap: 2em;
+    padding: 2em 0 2em 0;
     border: solid 1px var(--primary);
 
 
