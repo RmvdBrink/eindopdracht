@@ -4,12 +4,15 @@ import axios from "axios";
 import Button from "../../components/button/Button";
 import "./Calculator.css"
 
-const APP_ID = "0c78e8a1&app"
+const APP_ID = "0c78e8a1"
 const APP_KEY = "d17f117cd5cfc21bccfac6a9560a352a"
 
 function Calculator() {
 
-
+//     .post(`https://api.edamam.com/api/nutrition-details?app_id=${APP_ID}&app_key=${APP_KEY}`, {
+//         headers: { "Content-Type": "application/json", "Accept": "application/json"},
+//         // data: { query }
+// })
         const [calorie, setCalorie] = useState([]);
         const [search, setSearch] = useState("")
         const [error, toggleError] = useState(false);
@@ -21,12 +24,15 @@ function Calculator() {
             const controller = new AbortController();
 
 
+
             async function fetchData() {
                 toggleLoading(true);
 
                 try {
                     toggleError(false);
-                    const data = await axios.get(`https://api.edamam.com/api/nutrition-data?app_id=${APP_ID}_key=${APP_KEY}&nutrition-type=cooking&ingr=${query}`,{signal: controller.signal} )
+                    const data = await axios.get(`https://api.edamam.com/api/nutrition-data?app_id=${APP_ID}&app_key=${APP_KEY}&nutrition-type=cooking&ingr=${query}`,{signal: controller.signal} )
+
+
                     console.log(data.data)
                     setCalorie(data.data)
                     // query

@@ -4,8 +4,10 @@ import axios from "axios";
 import SearchCard from "../../components/search-card/SearchCard";
 import Button from "../../components/button/Button";
 import CheckboxComponent from "../../components/chekbox-component/CheckboxComponent";
+import DietsCheckboxComponent from "../../components/chekbox-component/diets-components/DietsCheckboxComponent";
+import InputComponent from "../../components/input component/InputComponent";
 // import { useForm} from "react-hook-form";
-// import InputComponent from "../../components/input component/InputComponent";
+
 
 
 const APP_ID = "08659f69"
@@ -18,11 +20,22 @@ function Search() {
     const [query, setQuery] = useState("")
     const [loading, toggleLoading] = useState(false);
     const [selectedAllergen, setSelectedAllergen] = useState([]);
-
-
+    const [selectedDiet, setSelectedDiet] = useState([])
+    const [minCalories, setMinCalories] = useState("");
+    const [maxCalories, setMaxCalories] = useState("");
     // const { handleSubmit, formState: { errors },register  } = useForm();
 
-    const allergenToExclude = selectedAllergen.join(',');
+    const allergenToExclude = selectedAllergen.join(",");
+    const dietsToExclude = selectedDiet.join(",");
+
+    const calorieRange = ("calories=")
+    const combineMinMaxCalorie = minCalories.toString().concat('-',  maxCalories.toString());
+    let totalCalorieRange = calorieRange.concat(combineMinMaxCalorie)
+
+    if (totalCalorieRange === "calories=-") {
+        totalCalorieRange= "";
+    }
+
 
     useEffect(() => {
         const controller = new AbortController();
@@ -32,10 +45,10 @@ function Search() {
 
             try {
                 toggleError(false);
-                const data = await axios.get(`https://api.edamam.com/api/recipes/v2?type=public&q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}&${allergenToExclude}`,{signal: controller.signal})
+                const data = await axios.get(`https://api.edamam.com/api/recipes/v2?type=public&q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}&${dietsToExclude}&${allergenToExclude}&${totalCalorieRange}`,{signal: controller.signal})
                 console.log(data.data.hits)
                 setRecipes(data.data.hits)
-                // &health=dairy-free
+
 
             } catch (e) {
 
@@ -57,13 +70,16 @@ function Search() {
 
     const updateSearch = e => {
         setSearch(e.target.value);
-        console.log(search);
+
     }
 
     const getSearch = e => {
         e.preventDefault();
         setQuery(search);
         setSearch("");
+        setMaxCalories("")
+        setMinCalories("")
+
     }
     // Voeg een functie toe die wordt uitgevoerd wanneer een allergeen wordt geselecteerd of deselecteerd
     const handleAllergenChange = (allergen) => {
@@ -74,6 +90,18 @@ function Search() {
         } else {
             // Voeg het allergeen toe aan de lijst
             setSelectedAllergen([...selectedAllergen, allergen]);
+        }
+    }
+
+    // Voeg een functie toe die wordt uitgevoerd wanneer een diets wordt geselecteerd of deselecteerd
+    const handleDietsChange = (diets) => {
+        // Controleer of het diets al in de lijst met geselecteerde diets staat
+        if (selectedDiet.includes(diets)) {
+            // Verwijder het diets uit de lijst
+            setSelectedDiet(selectedDiet.filter((a) => a !== diets));
+        } else {
+            // Voeg het diets toe aan de lijst
+            setSelectedDiet([...selectedDiet, diets]);
         }
     }
 
@@ -102,59 +130,80 @@ function Search() {
                             onChange={updateSearch}
                             placeholder="search her for you recipes "
                         />
-
+                            {/*{console.log(search)}*/}
                       <Button
                        name="search-button"
                        type="submit"
                        children="Search"
                        />
                         </div>
+                        {/*{totalCalorieRange === "" ? calorieRange === "" : calorieRange}*/}
+                        <div className="min-max-input-field-kcal">
+                            {/*<InputComponent*/}
+                            {/*inputId="kcal-label"*/}
+                            {/*children="Min-kcal"*/}
+                            {/*inputType="text"*/}
+                            {/*inputPlaceholder="min value 100 kcal"*/}
+                            {/*value={maxCalories}*/}
+                            {/*changeHandler={(e) => setMinCalories(e.target.value)}*/}
+
+                            {/*/>*/}
+                            <label className="kcal-label" htmlFor="min-kcal">Min-kcal</label>
+                            <input
+                            type="text"
+                            id="kcal"
+                            name="kcal"
+                            placeholder="min value 100 kcal"
+                            value={minCalories} onChange={(e) => setMinCalories(e.target.value)} />
+
+                            <label className="kcal-label" htmlFor="max-kcal">Max-Kcal</label>
+                            <input
+                            type="text"
+                            id="kcal"
+                            name="kcal"
+                            placeholder="max value 3000 kcal"
+                            value={maxCalories} onChange={(e) => setMaxCalories(e.target.value)} />
+
+                            {console.log(minCalories)}
+                            {console.log(maxCalories)}
+                            {console.log(totalCalorieRange)}
+
+                        </div>
+                        <label className="search-label" htmlFor="allergens">allergies</label>
                         <div className="checkbox-content-container-search2">
                         {/* Maak het radiobox-menu voor allergenen */}
-                        {/*<label htmlFor="allergens"></label>*/}
+
                             <span className="cel1">
+
                             <CheckboxComponent
-                            classBox="1"
                             label="gluten"
                             type="checkbox"
                             checkBoxId="gluten"
                             name="allergen"
                             value="gluten"
-                            changeHandler={() => handleAllergenChange('free&health=gluten-free')}
+                            changeHandler={() => handleAllergenChange('health=gluten-free')}
                             children="Gluten-free"
                             />
 
-                            {/*<input type="checkbox" id="gluten-free" name="allergen" value="free&health=gluten-free" onChange={() => handleAllergenChange('free&health=gluten-free')} />*/}
-                            {/*<label htmlFor="gluten-free">Gluten-free</label>*/}
-
-
                             <CheckboxComponent
-                                // classBox="2"
                                 label="dairy"
                                 type="checkbox"
                                 checkBoxId="dairy"
                                 name="allergen"
                                 value="dairy"
-                                changeHandler={() => handleAllergenChange('free&health=dairy-free')}
+                                changeHandler={() => handleAllergenChange('health=dairy-free')}
                                 children="Dairy-free"
                             />
-                            {/*<input type="checkbox" id="dairy-free" name="allergen" value="free&health=dairy-free" onChange={() => handleAllergenChange('free&health=dairy-free')} />*/}
-                            {/*<label htmlFor="dairy-free">Dairy-free</label>*/}
-
 
                             <CheckboxComponent
-                                // classBox="3"
                                 label="fish"
                                 type="checkbox"
                                 checkBoxId="fish"
                                 name="allergen"
                                 value="fish"
-                                changeHandler={() => handleAllergenChange('free&health=fish-free')}
+                                changeHandler={() => handleAllergenChange('health=fish-free')}
                                 children="Fish-free"
                             />
-                            {/*<input type="checkbox" id="fish-free" name="allergen" value="free&health=fish-free" onChange={() => handleAllergenChange('free&health=fish-free')} />*/}
-                            {/*<label htmlFor="fish-free">Fish-free</label>*/}
-
 
                             <CheckboxComponent
                                 label="crustacean"
@@ -162,153 +211,330 @@ function Search() {
                                 checkBoxId="crustacean"
                                 name="allergen"
                                 value="crustacean"
-                                changeHandler={() => handleAllergenChange('free&health=crustacean-free')}
+                                changeHandler={() => handleAllergenChange('health=crustacean-free')}
                                 children="Crustacean-free"
                             />
-                            {/*<input type="checkbox" id="crustacean-free" name="allergen" value="free&health=crustacean-free" onChange={() => handleAllergenChange('free&health=crustacean-free')} />*/}
-                            {/*<label htmlFor="Crustacean-free">Crustacean-free</label>*/}
 
                             <CheckboxComponent
-                                // classBox="5"
                                 label="lupine"
                                 type="checkbox"
                                 checkBoxId="lupine"
                                 name="allergen"
                                 value="lupine"
-                                changeHandler={() => handleAllergenChange('free&health=lupine-free')}
+                                changeHandler={() => handleAllergenChange('health=lupine-free')}
                                 children="Lupine-free"
                             />
-                        {/*<input type="checkbox" id="lupine-free" name="allergen" value="free&health=lupine-free" onChange={() => handleAllergenChange('free&health=lupine-free')} />*/}
-                        {/*<label htmlFor="lupine-free">Lupine-free</label>*/}
-
 
                             <CheckboxComponent
-                                // classBox="6"
                                 label="peanut-free"
                                 type="checkbox"
                                 checkBoxId="peanut"
                                 name="allergen"
                                 value="peanut"
-                                changeHandler={() => handleAllergenChange('free&health=peanut-free')}
+                                changeHandler={() => handleAllergenChange('health=peanut-free')}
                                 children="Peanut-free"
                             />
-                            {/*<input type="checkbox" id="peanut-free" name="allergen" value="free&health=peanut-free" onChange={() => handleAllergenChange('free&health=peanut-free')} />*/}
-                            {/*<label htmlFor="peanut-free">Peanut-free</label>*/}
-
 
                             <CheckboxComponent
-                                // classBox="7"
                                 label="tree-Nut"
                                 type="checkbox"
                                 checkBoxId="tree-Nut"
                                 name="allergen"
                                 value="tree-Nut"
-                                changeHandler={() => handleAllergenChange('free&health=tree-Nut-free')}
+                                changeHandler={() => handleAllergenChange('health=tree-Nut-free')}
                                 children="Tree-Nut-free"
                             />
-                            {/*<input type="checkbox" id="tree-Nut-free" name="allergen" value="free&health=tree-Nut-free" onChange={() => handleAllergenChange('free&health=tree-Nut-free')} />*/}
-                            {/*<label htmlFor="tree-Nut-free">Tree-nut</label>*/}
+
                             </span>
                             <span className="cel2">
                             <CheckboxComponent
-                                // classBox="8"
                                 label="shellfish"
                                 type="checkbox"
                                 checkBoxId="shellfish"
                                 name="allergen"
                                 value="shellfish"
-                                changeHandler={() => handleAllergenChange('free&health=shellfish-free')}
+                                changeHandler={() => handleAllergenChange('health=shellfish-free')}
                                 children="Shellfish-free"
                             />
-                            {/*<input type="checkbox" id="shellfish-free" name="allergen" value="free&health=shellfish-free" onChange={() => handleAllergenChange('free&health=shellfish-free')} />*/}
-                            {/*<label htmlFor="shellfish-free">Shellfish-free</label>*/}
-
 
                             <CheckboxComponent
-                                // classBox="9"
                                 label="celery"
                                 type="checkbox"
                                 checkBoxId="celery"
                                 name="allergen"
                                 value="celery"
-                                changeHandler={() => handleAllergenChange('free&health=celery-free')}
+                                changeHandler={() => handleAllergenChange('health=celery-free')}
                                 children="Celery-free"
                             />
-                            {/*<input type="checkbox" id="celery-free" name="allergen" value="free&health=celery-free" onChange={() => handleAllergenChange('free&health=celery-free')} />*/}
-                            {/*<label htmlFor="celery-free">Celery-free</label>*/}
-
 
                             <CheckboxComponent
-                                // classBox="10"
                                 label="egg"
                                 type="checkbox"
                                 checkBoxId="egg"
                                 name="allergen"
                                 value="egg"
-                                changeHandler={() => handleAllergenChange('free&health=egg-free')}
+                                changeHandler={() => handleAllergenChange('health=egg-free')}
                                 children="Egg-free"
                             />
-                            {/*<input type="checkbox" id="egg-free" name="allergen" value="free&health=egg-free" onChange={() => handleAllergenChange('free&health=egg-free')} />*/}
-                            {/*<label htmlFor="egg-free">Egg-free</label>*/}
-
 
                             <CheckboxComponent
-                                // classBox="11"
                                 label="mustard"
                                 type="checkbox"
                                 checkBoxId="mustard"
                                 name="allergen"
                                 value="mustard"
-                                changeHandler={() => handleAllergenChange('free&health=mustard-free')}
+                                changeHandler={() => handleAllergenChange('health=mustard-free')}
                                 children="Mustard-free"
                             />
-                            {/*<input type="checkbox" id="mustard-free" name="allergen" value="free&health=mustard-free" onChange={() => handleAllergenChange('free&health=mustard-free')} />*/}
-                            {/*<label htmlFor="mustard-free">Mustard-free</label>*/}
-
 
                             <CheckboxComponent
-                                // classBox="12"
                                 label="sesame"
                                 type="checkbox"
                                 checkBoxId="sesame"
                                 name="allergen"
                                 value="sesame"
-                                changeHandler={() => handleAllergenChange('free&health=sesame-free')}
+                                changeHandler={() => handleAllergenChange('health=sesame-free')}
                                 children="Sesame-free"
                             />
-                            {/*<input type="checkbox" id="sesame-free" name="allergen" value="free&health=sesame-free" onChange={() => handleAllergenChange('free&health=sesame-free')} />*/}
-                            {/*<label htmlFor="sesame-free">Sesame-free</label>*/}
-
 
                             <CheckboxComponent
-                                // classBox="13"
                                 label="soy-free"
                                 type="checkbox"
                                 checkBoxId="soy"
                                 name="allergen"
                                 value="soy"
-                                changeHandler={() => handleAllergenChange('free&health=soy-free')}
+                                changeHandler={() => handleAllergenChange('health=soy-free')}
                                 children="Soy-free"
                             />
-                            {/*<input type="checkbox" id="soy-free" name="allergen" value="free&health=soy-free" onChange={() => handleAllergenChange('free&health=soy-free')} />*/}
-                            {/*<label htmlFor="soy-free">Soy-free</label>*/}
-
 
                             <CheckboxComponent
-                                // classBox="14"
                                 label="wheat"
                                 type="checkbox"
                                 checkBoxId="wheat"
                                 name="allergen"
                                 value="wheat"
-                                changeHandler={() => handleAllergenChange('free&health=wheat-free')}
+                                changeHandler={() => handleAllergenChange('health=wheat-free')}
                                 children="Wheat-free"
                             />
-                            {/*<input type="checkbox" id="wheat-free" name="allergen" value="free&health=wheat-free" onChange={() => handleAllergenChange('free&health=wheat-free')} />*/}
-                            {/*<label htmlFor="wheat-free">Wheat-free</label>*/}
+
                         </span>
                         </div>
-                        {console.log(allergenToExclude)}
+                        {/*{console.log(allergenToExclude)}*/}
+
+                        {/* Maak het radiobox-menu voor diets */}
+                        <label className="search-label" htmlFor="diets">Diets</label>
+                        <div className="checkbox-content-container-search2">
+
+
+                            <span className="cel1">
+
+
+
+                            <DietsCheckboxComponent
+                                label="balanced"
+                                type="checkbox"
+                                checkBoxId="balanced"
+                                name="diets"
+                                value="diet=balanced&"
+                                changeHandler={() => handleDietsChange('diet=balanced&')}
+                                children="Balanced"
+                            />
+
+                            <DietsCheckboxComponent
+                                label="high-fiber"
+                                type="checkbox"
+                                checkBoxId="high-fiber"
+                                name="diets"
+                                value="diet=high-fiber&"
+                                changeHandler={() => handleDietsChange('diet=high-fiber&')}
+                                children="High-Fiber"
+                            />
+
+                            <DietsCheckboxComponent
+                                label="high-protein"
+                                type="checkbox"
+                                checkBoxId="high-protein"
+                                name="diets"
+                                value="diet=high-protein&"
+                                changeHandler={() => handleDietsChange('diet=high-protein&')}
+                                children="High-Protein"
+                            />
+
+
+                            <DietsCheckboxComponent
+                                label="low-Carb"
+                                type="checkbox"
+                                checkBoxId="low-Carb"
+                                name="diets"
+                                value="diet=low-Carb&"
+                                changeHandler={() => handleDietsChange('diet=low-carb&')}
+                                children="Low-Carb"
+                            />
+
+                            <DietsCheckboxComponent
+                                label="low-fat"
+                                type="checkbox"
+                                checkBoxId="low-fat&"
+                                name="diets"
+                                value="diet=low-fat"
+                                changeHandler={() => handleDietsChange('diet=low-fat&')}
+                                children="Low-Fat"
+                            />
+
+                            <DietsCheckboxComponent
+                                label="low-sodium"
+                                type="checkbox"
+                                checkBoxId="low-sodium&"
+                                name="diets"
+                                value="diet=low-sodium"
+                                changeHandler={() => handleDietsChange('diet=low-sodium&')}
+                                children="Low-Sodium"
+                            />
+                            <DietsCheckboxComponent
+                                label="alcohol-free"
+                                type="checkbox"
+                                checkBoxId="alcohol-free"
+                                name="allergen"
+                                value="health=alcohol-free"
+                                changeHandler={() => handleAllergenChange('health=alcohol-free')}
+                                children="Alcohol-free"
+                            />
+
+                            <DietsCheckboxComponent
+                                label="keto"
+                                type="checkbox"
+                                checkBoxId="keto"
+                                name="allergen"
+                                value="health=keto-friendly"
+                                changeHandler={() => handleAllergenChange('health=keto-friendly')}
+                                children="Keto"
+                            />
+
+                            <DietsCheckboxComponent
+                                label="kidney-friendly"
+                                type="checkbox"
+                                checkBoxId="kidney-friendly"
+                                name="allergen"
+                                value="health=kidney-friendly"
+                                changeHandler={() => handleAllergenChange('health=kidney-friendly')}
+                                children="Kidney-friendly"
+                            />
+
+                            <DietsCheckboxComponent
+                                label="kosher"
+                                type="checkbox"
+                                checkBoxId="kosher"
+                                name="allergen"
+                                value="health=kosher"
+                                changeHandler={() => handleAllergenChange('health=kosher')}
+                                children="Kosher"
+                            />
+
+                             </span>
+                            <span className="cel2">
+
+                            <DietsCheckboxComponent
+                                label="low-potassium"
+                                type="checkbox"
+                                checkBoxId="low-potassium"
+                                name="allergen"
+                                value="health=low-potassium"
+                                changeHandler={() => handleAllergenChange('health=low-potassium')}
+                                children="Low-Potassium"
+                            />
+
+                            <DietsCheckboxComponent
+                                label="no-oil-added"
+                                type="checkbox"
+                                checkBoxId="no-oil-added"
+                                name="allergen"
+                                value="health=no-oil-added"
+                                changeHandler={() => handleAllergenChange('health=no-oil-added')}
+                                children="No oil added"
+                            />
+
+                            <DietsCheckboxComponent
+                                label="low-sugar"
+                                type="checkbox"
+                                checkBoxId="low-sugar"
+                                name="allergen"
+                                value="health=low-sugar"
+                                changeHandler={() => handleAllergenChange('health=low-sugar')}
+                                children="Low-sugar"
+                            />
+
+                            <DietsCheckboxComponent
+                                label="paleo"
+                                type="checkbox"
+                                checkBoxId="paleo"
+                                name="allergen"
+                                value="health=paleo"
+                                changeHandler={() => handleAllergenChange('health=paleo')}
+                                children="Paleo"
+                            />
+
+                           <DietsCheckboxComponent
+                               label="pescatarian"
+                               type="checkbox"
+                               checkBoxId="pescatarian"
+                               name="allergen"
+                               value="health=pescatarian"
+                               changeHandler={() => handleAllergenChange('health=pescatarian')}
+                               children="Pescatarian"
+                           />
+
+                           <DietsCheckboxComponent
+                               label="pork-free"
+                               type="checkbox"
+                               checkBoxId="pork-free"
+                               name="allergen"
+                               value="health=pork-free"
+                               changeHandler={() => handleAllergenChange('health=pork-free')}
+                               children="Pork-free"
+                           />
+
+                            <DietsCheckboxComponent
+                                label="red-meat-free"
+                                type="checkbox"
+                                checkBoxId="red-meat-free"
+                                name="allergen"
+                                value="health=red-meat-free"
+                                changeHandler={() => handleAllergenChange('health=red-meat-free')}
+                                children="Red-meat-free"
+                            />
+
+                            <DietsCheckboxComponent
+                                label="sugar-conscious"
+                                type="checkbox"
+                                checkBoxId="sugar-conscious"
+                                name="allergen"
+                                value="health=sugar-conscious"
+                                changeHandler={() => handleAllergenChange('health=sugar-conscious')}
+                                children="Sugar-conscious"
+                            />
+                                <DietsCheckboxComponent
+                                    label="vegan"
+                                    type="checkbox"
+                                    checkBoxId="vegan"
+                                    name="allergen"
+                                    value="health=vegan"
+                                    changeHandler={() => handleAllergenChange('health=vegan')}
+                                    children="Vegan"
+                                />
+
+                                <DietsCheckboxComponent
+                                    label="vegetarian"
+                                    type="checkbox"
+                                    checkBoxId="vegetarian"
+                                    name="allergen"
+                                    value="health=vegetarian"
+                                    changeHandler={() => handleAllergenChange('health=vegetarian')}
+                                    children="Vegetarian"
+                                />
+                        </span>
+                        </div>
+                        {/*{console.log(dietsToExclude)}*/}
+
                     </form>
 
                 </div>
