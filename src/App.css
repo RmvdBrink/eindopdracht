@@ -124,7 +124,7 @@ Hij mag krimpen als het scherm minder breed wordt, maar niet groeien als er meer
     justify-content: flex-start;
     border: #ff7124 solid 3px;
     padding: 20px 0;
-    gap: 190px;
+    gap: 110px;
 }
 
 .inner-content-containers-nav {

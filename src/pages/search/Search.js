@@ -25,6 +25,9 @@ function Search() {
     const [maxCalories, setMaxCalories] = useState("");
     // const { handleSubmit, formState: { errors },register  } = useForm();
 
+
+
+
     const allergenToExclude = selectedAllergen.join(",");
     const dietsToExclude = selectedDiet.join(",");
     //function that requests min and max kcal for recpten filter

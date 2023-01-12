@@ -3,18 +3,48 @@ import "./SignUp.css"
 import "../../App.css"
 import {useForm} from "react-hook-form";
 import Button from "../../components/button/Button";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import InputComponent from "../../components/input component/InputComponent";
+import axios from "axios";
 
 function SignUp() {
 
     const { handleSubmit, formState: { errors },register  } = useForm();
 
+const navigate = useNavigate();
+    // function handleFormSubmit(data) {
+    //     console.log(data)
+    //     console.log({
+    //         email: data.email,
+    //         password: data.password,
+    //         username: data.username,
+    //     })
+    // }
 
-    function handleFormSubmit(data) {
-        console.log(data)
+    async function handleFormSubmit(data) {
+
+        // toggleError(false);
+        // toggleLoading(true);
+
+        try {
+            const response = await axios.post(`https://frontend-educational-backend.herokuapp.com/api/auth/signup`, {
+                "username": data.username,
+                "email": data.email,
+                "password": data.password,
+                "role": ["user", "admin"]
+
+
+            })
+
+            console.log(response)
+            navigate("/sign-in")
+
+        } catch (e) {
+            console.error(e.response)
+            // toggleError(true);
+        }
+        // toggleLoading(false);
     }
-
 
 
     return (
@@ -57,7 +87,7 @@ function SignUp() {
                             inputId="username"
                             children="Username:"
                             inputType="text"
-                            inputName="username:"
+                            inputName="username"
                             inputPlaceholder="FitFoodie"
                             validationRules={{
                                 required: {

@@ -1,11 +1,18 @@
-import React from 'react';
+import React, {useContext} from 'react';
 // import Logo from "./assets/logo-og.png"
 import {NavLink} from "react-router-dom";
 import "./Header.css"
 import "../../App.css"
+import {AuthContext} from "../../context/AuthContext";
+import Button from "../button/Button";
+
 
 
 function Header() {
+
+    const { isAuth, logout, user} = useContext(AuthContext);
+    // const navigate = useNavigate();
+    console.log(user)
     return (
        <>
 
@@ -13,8 +20,22 @@ function Header() {
 
                <div className="inner-content-containers-header ">
                <ul className="ulh">
-                   <li><NavLink to="/sign-in">Sign in</NavLink></li>
+                   {isAuth ?
+                       <>
+                       {/*<span>{user.email}</span>*/}
+                       <Button
+                           name="button-logout"
+                           type="onclick"
+                           clickHandler={logout}
+                           children="logout"
 
+                       />
+                       </>
+                           :
+                       <li><NavLink to="/sign-in">Sign in</NavLink></li>
+
+
+                   }
                </ul>
                         <h1>Healthy Recepis</h1>
            </div>
@@ -26,7 +47,9 @@ function Header() {
                    <li><NavLink to="/search">Recipes</NavLink></li>
                    <li><NavLink to="/kcal-calculator">Calculator</NavLink></li>
                    <li><NavLink to="/contact">Contact</NavLink></li>
-                   <li><NavLink to="/favourite">Favourite</NavLink></li>
+                   {isAuth ?
+                   <li>< NavLink to="/favourite">Favourite </NavLink></li>
+                       : ""}
                </ul>
            </nav>
            </div>
