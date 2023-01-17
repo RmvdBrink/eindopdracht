@@ -5,7 +5,7 @@ import Calculator from "./pages/calculator/Calculator";
 import Contact from "./pages/contact/Contact";
 import Disclaimer from"./pages/discalimer/Disclaimer";
 import Faq from "./pages/F-A-Q/Faq";
-import Favourite from "./pages/favourite/FavouritePage";
+import Favorite from "./pages/favorite/FavoritePage";
 import Search from "./pages/search/Search";
 import SignIn from "./pages/sign-in/SignIn";
 import SignUp from "./pages/sign-up/SignUp";
@@ -36,7 +36,7 @@ function App() {
           <Route path="/contact" element={<Contact/>}/>
           <Route path="/disclaimer" element={<Disclaimer/>}/>
           <Route path="/f-a-q" element={<Faq/>}/>
-          <Route path="/favourite" element={<Favourite/>}/>
+          <Route path="/favorite-page" element={<Favorite/>}/>
           <Route path="/search" element={<Search/>}/>
           <Route path="/recipes-page/:id" element={<RecipesPage/>}/>
           <Route path="/search-card/:id" element={<SearchCard/>}/>

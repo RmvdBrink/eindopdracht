@@ -48,7 +48,7 @@ function Header() {
                    <li><NavLink to="/kcal-calculator">Calculator</NavLink></li>
                    <li><NavLink to="/contact">Contact</NavLink></li>
                    {isAuth ?
-                   <li>< NavLink to="/favourite">Favourite </NavLink></li>
+                   <li>< NavLink to="/favorite-page">Favorite </NavLink></li>
                        : ""}
                </ul>
            </nav>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Loader from './Loader';
+import Loader from '../loader-compenent/LoaderComponent';
+import Button from "../button/Button";
 
 const SearchContainer = ({ searchForRecipes, hideLoader }) => {
     const [input, setInput] = useState('');
@@ -30,7 +31,7 @@ const SearchContainer = ({ searchForRecipes, hideLoader }) => {
                     onChange={e => setInput(e.target.value)}
                 />
                 <div className="search-button" onClick={handleSearchButton}>
-                    <svg className="fa-solid fa-magnifying-glass"></svg>
+                   <Button onClick={handleSearchButton}/>
                 </div>
             </div>
 

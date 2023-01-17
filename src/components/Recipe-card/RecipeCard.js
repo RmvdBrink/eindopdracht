@@ -1,7 +1,7 @@
 import React from 'react';
 import RoundCalories from "../../helpers/roundCalories";
 import "./RecipeCard.css"
-import AddToFavorites from './AddToFavorites';
+import AddToFavorites from '../AddToFavorites';
 
 const CLASS_NAME = "full-view-recipe";
 

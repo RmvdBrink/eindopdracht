@@ -8,6 +8,7 @@ import DietsCheckboxComponent from "../../components/chekbox-component/diets-com
 import InputComponent from "../../components/input component/InputComponent";
 import {RecipesContext} from "../../context/RecipesContext";
 import SearchContainer from "../../components/serche-container-component/SearcheContainerComponent";
+import NotificationTab from "../../components/notification-tab/NotificationTab";
 // import { useForm} from "react-hook-form";
 
 
@@ -597,7 +598,7 @@ function Search() {
                 </div>
             <div className="content-container-search3">
 
-            {recipes.length > 0 ? <RecipesList recipes={recipes}/> : null}
+            {recipes.length > 0 ? <SearchCard recipes={recipes}/> : null}
             {showNotificationTab ? <NotificationTab text="No recipes found for your search" setShowNotificationTab={setShowNotificationTab} /> : null}
                 {/*{recipes.map((recipe) => {*/}
                 {/*    return( <SearchCard*/}
