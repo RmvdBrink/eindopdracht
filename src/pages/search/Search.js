@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import "./Search.css"
 import axios from "axios";
 import SearchCard from "../../components/search-card/SearchCard";
@@ -6,6 +6,7 @@ import Button from "../../components/button/Button";
 import CheckboxComponent from "../../components/chekbox-component/CheckboxComponent";
 import DietsCheckboxComponent from "../../components/chekbox-component/diets-components/DietsCheckboxComponent";
 import InputComponent from "../../components/input component/InputComponent";
+import {RecipesContext} from "../../context/RecipesContext";
 // import { useForm} from "react-hook-form";
 
 
@@ -14,7 +15,7 @@ const APP_ID = "08659f69"
 const APP_KEY = "13cd3b413ae7c5546cc09ef8a8590c71"
 
 function Search() {
-    const [recipes, setRecipes] = useState([]);
+
     const [search, setSearch] = useState("")
     const [error, toggleError ] = useState(false);
     const [query, setQuery] = useState("")
@@ -23,7 +24,10 @@ function Search() {
     const [selectedDiet, setSelectedDiet] = useState([])
     const [minCalories, setMinCalories] = useState("");
     const [maxCalories, setMaxCalories] = useState("");
-    // const { handleSubmit, formState: { errors },register  } = useForm();
+    const [showNotificationTab, setShowNotificationTab] = useState(false);
+    const [hideLoader, setHideLoader] = useState(false);
+
+    const { recipes, setRecipes } = useContext(RecipesContext);
 
 
 
@@ -39,38 +43,86 @@ function Search() {
         totalCalorieRange= "";
     }
 
+    const searchForRecipes = async (query) => {
+        if (query === "") return;
+
+        // resetting hide loader
+        setHideLoader(false);
+
+        const requestURL = getRecipesSearchRequestRL(query);
+        const searchRecipes = await fetch(requestURL);
+        const returnedRecipes = await searchRecipes.json();
+
+        if (returnedRecipes.to === 0) {
+            setShowNotificationTab(true);
+        } else {
+            const recipes = getRequiredRecipesData(returnedRecipes.hits);
+            setRecipes(recipes);
+        }
+        // used in SearchContainer and HealthyFoods components to hide loader when recipes are found
+        setHideLoader(true);
+    }
 
 
-    useEffect(() => {
-        const controller = new AbortController();
+    // Returns URL used to fetch recipes from edamam recipe search api
+// using the required environment variables id and key which are stored in .env file
+    const getRecipesSearchRequestRL = (query) => {
+        return `https://api.edamam.com/api/recipes/v2?type=public&q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}&${dietsToExclude}&${allergenToExclude}&${totalCalorieRange}`
+    }
 
-        async function fetchData() {
-            toggleLoading(true);
+    const getRequiredRecipesData = (recipes) => {
+        return recipes.map((recipe) => {
+            let largeImage = recipe.recipe.images.LARGE !== undefined ?
+                recipe.recipe.images.LARGE.url :
+                recipe.recipe.images.REGULAR.url ;
 
-            try {
-                toggleError(false);
-                const data = await axios.get(`https://api.edamam.com/api/recipes/v2?type=public&q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}&${dietsToExclude}&${allergenToExclude}&${totalCalorieRange}`,{signal: controller.signal})
-                console.log(data.data.hits)
-                setRecipes(data.data.hits)
-
-
-            } catch (e) {
-
-                if (axios.isCancel(e)) {
-                    console.log("The axios request was cancelled")
-                }  else {
-                    console.error(e)
-                    toggleError(true)
+                return {
+                    name: recipe.recipe.label,
+                    prepTime: recipe.recipe.totalTime,
+                    ingredients: recipe.recipe.ingredientLines,
+                    calories: recipe.recipe.calories,
+                    cuisineType: recipe.recipe.cuisineType,
+                    mealType: recipe.recipe.mealType,
+                    dishType: recipe.recipe.dishType,
+                    uri: recipe.recipe.uri,
+                    image: recipe.recipe.images.SMALL.url,
+                    largeImage: largeImage
                 }
+            });
             }
-            toggleLoading(false)
-        }
-        void fetchData()
 
-        return function cleanup() {
-            controller.abort();
-        }
-    }, [query]);
+
+
+    // useEffect(() => {
+    //     const controller = new AbortController();
+    //
+    //     async function fetchData() {
+    //         toggleLoading(true);
+    //
+    //         try {
+    //             toggleError(false);
+    //             const data = await axios.get(`https://api.edamam.com/api/recipes/v2?type=public&q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}&${dietsToExclude}&${allergenToExclude}&${totalCalorieRange}`,{signal: controller.signal})
+    //             console.log(data.data.hits)
+    //             setRecipes(data.data.hits)
+    //
+    //
+    //         } catch (e) {
+    //
+    //             if (axios.isCancel(e)) {
+    //                 console.log("The axios request was cancelled")
+    //             }  else {
+    //                 console.error(e)
+    //                 toggleError(true)
+    //             }
+    //         }
+    //         toggleLoading(false)
+    //     }
+    //     void fetchData()
+    //
+    //     return function cleanup() {
+    //         controller.abort();
+    //     }
+    // }, [query]);
 
     const updateSearch = e => {
         setSearch(e.target.value);
@@ -125,22 +177,22 @@ function Search() {
             {loading && <p>we are loading the data for you</p>}
                 <div className="content-container-search2">
                     <form onSubmit={getSearch} >
-
-                        <div className="form-item">
-                        <input className="search-bar"
-                            type="text"
-                            name="search"
-                            value={search}
-                            onChange={updateSearch}
-                            placeholder="search her for you recipes "
-                        />
-                            {/*{console.log(search)}*/}
-                      <Button
-                       name="search-button"
-                       type="submit"
-                       children="Search"
-                       />
-                        </div>
+                    <SearchContainer searchForRecipes={searchForRecipes} hideLoader={hideLoader}/>
+                      {/*  <div className="form-item">*/}
+                      {/*  <input className="search-bar"*/}
+                      {/*      type="text"*/}
+                      {/*      name="search"*/}
+                      {/*      value={search}*/}
+                      {/*      onChange={updateSearch}*/}
+                      {/*      placeholder="search her for you recipes "*/}
+                      {/*  />*/}
+                      {/*      /!*{console.log(search)}*!/*/}
+                      {/*<Button*/}
+                      {/* name="search-button"*/}
+                      {/* type="submit"*/}
+                      {/* children="Search"*/}
+                      {/* />*/}
+                      {/*  </div>*/}
                         {/*{totalCalorieRange === "" ? calorieRange === "" : calorieRange}*/}
                         <div className="min-max-input-field-kcal">
                             {/*<InputComponent*/}
@@ -543,17 +595,20 @@ function Search() {
 
                 </div>
             <div className="content-container-search3">
-                {recipes.map((recipe) => {
-                    return( <SearchCard
-                            key={recipe.recipe.uri}
-                            title={recipe.recipe.label}
-                            calories={recipe.recipe.calories}
-                            image={recipe.recipe.image}
-                            id={recipe.recipe.uri.split("_")[1]}
-                        />
 
-                    )
-                })}
+            {recipes.length > 0 ? <RecipesList recipes={recipes}/> : null}
+            {showNotificationTab ? <NotificationTab text="No recipes found for your search" setShowNotificationTab={setShowNotificationTab} /> : null}
+                {/*{recipes.map((recipe) => {*/}
+                {/*    return( <SearchCard*/}
+                {/*            key={recipe.recipe.uri}*/}
+                {/*            title={recipe.recipe.label}*/}
+                {/*            calories={recipe.recipe.calories}*/}
+                {/*            image={recipe.recipe.image}*/}
+                {/*            id={recipe.recipe.uri.split("_")[1]}*/}
+                {/*        />*/}
+
+                {/*    )*/}
+                {/*})}*/}
             </div>
         </section>
     </main>
