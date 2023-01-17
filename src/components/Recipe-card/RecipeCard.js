@@ -1,43 +1,42 @@
 import React from 'react';
 import RoundCalories from "../../helpers/roundCalories";
 import "./RecipeCard.css"
-import AddToFavorites from '../AddToFavorites';
+import AddToFavorites from '../add-to-favorite/AddToFavorites';
+import roundCalories from "../../helpers/roundCalories";
 
-const CLASS_NAME = "full-view-recipe";
 
-const RecipeCard = ({ recipe, setShowClickedRecipe }) => {
 
-    // Closes recipe full view when user click anywhere except the recipe container
-    const handleClick = (e) => {
-        if (CLASS_NAME === e.target.classList[0]){
-            setShowClickedRecipe(false);
-        }
-    }
+const RecipeCard = ({ recipe }) => {
 
     return (
-        <div className={CLASS_NAME} onClick={handleClick}>
-            <div className="close-button" onClick={() => setShowClickedRecipe(false)}>
-
-            </div>
-
+        <div >
             <div className="recipe-container">
                 <div className="image" ></div>
                 <img src={recipe.image} alt={recipe.name}/>
                 <div className="info">
-                    <h3 className="title">{recipe.name}</h3>
+                    <h6 className="title">{recipe.name}</h6>
                     <p className="name">Preparation time</p>
 
                     {/* show prep time if more than 0 */}
                     <p className="description">{recipe.prepTime > 0 ? `${recipe.prepTime} minute(s)` : '-'}</p>
 
-                    <p className="name">Ingredients</p>
+
+                    <p className="description">{recipe.cuisineType}</p>
+                    <p className="name"></p>
+
+                    <p className="description">{recipe.mealType}</p>
+                    <p className="name"></p>
+
+                    <p className="description">{recipe.dishType}</p>
+                    <p className="name"></p>
+
                     {
                         recipe.ingredients.map((ingredient, i) => {
                             return <p key={i} className="description">~ {ingredient}</p>
                         })
                     }
                     <p className="name">Calories</p>
-                    <p className="description">{recipe.calories}</p>
+                    <p className="description">{roundCalories(recipe.calories)}</p>
 
                     <AddToFavorites recipe={recipe} />
                 </div>

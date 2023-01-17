@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import "./SearchCard.css"
-// import RoundCalories from "../../helpers/roundCalories";
-import {Link} from "react-router-dom";
+
 import RecipeCard from "../Recipe-card/RecipeCard";
 
 const SearchCard = ({ recipes, title}) => {
@@ -23,8 +22,8 @@ const SearchCard = ({ recipes, title}) => {
     console.log(clickedRecipe)
     return (
         <>
-            <h2 className="" >{title}</h2>
-            <section className="recipes-container">
+            <div >
+            <section className="content-container-search3">
                 {
                     recipes.map((recipe, i) => {
                         return(
@@ -42,6 +41,7 @@ const SearchCard = ({ recipes, title}) => {
                 }
 
             </section>
+            <section className="content-container-search4">
             {
                 // renders RecipeFullView when setShowClickedRecipe() is set to True
                 showClickedRecipe && <RecipeCard
@@ -49,6 +49,9 @@ const SearchCard = ({ recipes, title}) => {
                     setShowClickedRecipe={setShowClickedRecipe}
                 />
             }
+            </section>
+            </div>
+
         </>
     )
 }
@@ -57,7 +60,7 @@ const SearchCard = ({ recipes, title}) => {
 // then the function inside the useEffect in RecipesList runs when recipe index is updated upon click
 const Recipe = ({ title, image, index, setRecipeIndex}) => {
     return(
-        <div className="recipe" onClick={() => setRecipeIndex(index)}>
+        <div className="container-search-card" onClick={() => setRecipeIndex(index)}>
             <div className="recipe-image" >
                 <img src={image} alt={title}/>
                 <div className="overlay"></div>

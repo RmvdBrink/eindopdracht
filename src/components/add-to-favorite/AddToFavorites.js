@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect, useCallback } from 'react';
-import { FavoritesContext } from '../context/Favorites'
+import { FavoritesContext } from '../../context/Favorites'
 
 const AddToFavorites = ({ recipe }) => {
     const [addToFavorites, setAddToFavorites] = useState(true);

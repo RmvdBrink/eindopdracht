@@ -20,7 +20,6 @@ function Search() {
 
     const [search, setSearch] = useState("")
     const [error, toggleError ] = useState(false);
-    const [query, setQuery] = useState("")
     const [loading, toggleLoading] = useState(false);
     const [selectedAllergen, setSelectedAllergen] = useState([]);
     const [selectedDiet, setSelectedDiet] = useState([])
@@ -32,9 +31,10 @@ function Search() {
     const { recipes, setRecipes } = useContext(RecipesContext);
 
 
+    // const allergenToExclude = selectedAllergen.map(allergen => allergen.toString()).join(",");
+    // const dietsToExclude = selectedDiet.map(diet => diet.toString()).join(",");
 
-
-    const allergenToExclude = selectedAllergen.join(",");
+    const allergenToExclude = selectedAllergen.join(",hallo");
     const dietsToExclude = selectedDiet.join(",");
     //function that requests min and max kcal for recpten filter
     const calorieRange = ("calories=")
@@ -47,10 +47,11 @@ function Search() {
 
     const searchForRecipes = async (query) => {
         if (query === "") return;
+        toggleError(true)
 
         // resetting hide loader
         setHideLoader(false);
-
+        toggleLoading(true)
         const requestURL = getRecipesSearchRequestRL(query);
         const searchRecipes = await fetch(requestURL);
         const returnedRecipes = await searchRecipes.json();
@@ -60,9 +61,13 @@ function Search() {
         } else {
             const recipes = getRequiredRecipesData(returnedRecipes.hits);
             setRecipes(recipes);
+
         }
         // used in SearchContainer and HealthyFoods components to hide loader when recipes are found
         setHideLoader(true);
+        toggleLoading(false)
+        toggleError(false)
+
     }
 
 
@@ -126,14 +131,11 @@ function Search() {
     //     }
     // }, [query]);
 
-    const updateSearch = e => {
-        setSearch(e.target.value);
 
-    }
 
     const getSearch = e => {
         e.preventDefault();
-        setQuery(search);
+        searchForRecipes()
         setSearch("");
         setMaxCalories("")
         setMinCalories("")
@@ -172,7 +174,7 @@ function Search() {
             <div className="content-container-search1">
 
                 <h2>Recipes Search page</h2>
-                <p>search her for you best recipes</p>
+                <p> Find healthy recipes that contributes to your daily life!</p>
 
             </div>
             {error && <p>Something went wrong while retrieving the data</p>}
@@ -180,32 +182,9 @@ function Search() {
                 <div className="content-container-search2">
                     <form onSubmit={getSearch} >
                     <SearchContainer searchForRecipes={searchForRecipes} hideLoader={hideLoader}/>
-                      {/*  <div className="form-item">*/}
-                      {/*  <input className="search-bar"*/}
-                      {/*      type="text"*/}
-                      {/*      name="search"*/}
-                      {/*      value={search}*/}
-                      {/*      onChange={updateSearch}*/}
-                      {/*      placeholder="search her for you recipes "*/}
-                      {/*  />*/}
-                      {/*      /!*{console.log(search)}*!/*/}
-                      {/*<Button*/}
-                      {/* name="search-button"*/}
-                      {/* type="submit"*/}
-                      {/* children="Search"*/}
-                      {/* />*/}
-                      {/*  </div>*/}
-                        {/*{totalCalorieRange === "" ? calorieRange === "" : calorieRange}*/}
-                        <div className="min-max-input-field-kcal">
-                            {/*<InputComponent*/}
-                            {/*inputId="kcal-label"*/}
-                            {/*children="Min-kcal"*/}
-                            {/*inputType="text"*/}
-                            {/*inputPlaceholder="min value 100 kcal"*/}
-                            {/*value={maxCalories}*/}
-                            {/*changeHandler={(e) => setMinCalories(e.target.value)}*/}
 
-                            {/*/>*/}
+                        <div className="min-max-input-field-kcal">
+
                             <label className="kcal-label" htmlFor="min-kcal">Min-kcal</label>
                             <input
                             type="text"
@@ -233,6 +212,10 @@ function Search() {
 
                             <span className="cel1">
 
+
+
+                                {console.log(selectedDiet)}
+                                {console.log(selectedAllergen)}
                             <CheckboxComponent
                             label="gluten"
                             type="checkbox"
@@ -600,6 +583,8 @@ function Search() {
 
             {recipes.length > 0 ? <SearchCard recipes={recipes}/> : null}
             {showNotificationTab ? <NotificationTab text="No recipes found for your search" setShowNotificationTab={setShowNotificationTab} /> : null}
+
+
                 {/*{recipes.map((recipe) => {*/}
                 {/*    return( <SearchCard*/}
                 {/*            key={recipe.recipe.uri}*/}

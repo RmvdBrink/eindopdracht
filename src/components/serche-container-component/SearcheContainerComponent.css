@@ -1,0 +1,35 @@
+.form-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-self: baseline;
+    flex-wrap: wrap;
+
+}
+
+
+.search-bar {
+    width: 350px;
+    height: 38px;
+    padding: 5px 5px 5px 10px;
+    border-radius: 10px 0 0 10px;
+    border: solid 3px var(--primary);
+    box-shadow: .25rem .5rem 1rem 0 rgba(0, 0, 0, 0.1);
+}
+.search-button {
+    display: flex;
+    justify-content: center;
+    border-radius:0 10px 10px 0;
+    margin-top: 6px;
+    padding-bottom: 11px;
+    text-align: center;
+    border: solid 1px var(--button-color);
+    box-shadow: .25rem .5rem 1rem 0 rgba(0, 0, 0, 0.1);
+}
+
+.search-label {
+    display: flex; /* maakt van het label element een flex container */
+    justify-content: center; /* centreert de label tekst in het midden */
+    text-align: center;
+    font-size: 20px;
+}

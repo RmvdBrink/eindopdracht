@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Loader from '../loader-compenent/LoaderComponent';
 import Button from "../button/Button";
+import "./SearcheContainerComponent.css"
 
 const SearchContainer = ({ searchForRecipes, hideLoader }) => {
     const [input, setInput] = useState('');
@@ -20,19 +21,22 @@ const SearchContainer = ({ searchForRecipes, hideLoader }) => {
     }, [hideLoader])
 
     return (
-        <section className="search-container">
-            <h1>Find healthy recipes that contributes to your daily life!</h1>
+        <section>
 
-            <div className="search">
-                <input
+
+            <div className="form-item">
+                <input className="search-bar"
                     type="text"
                     placeholder="Search for a recipe"
                     value={input}
                     onChange={e => setInput(e.target.value)}
                 />
-                <div className="search-button" onClick={handleSearchButton}>
-                   <Button onClick={handleSearchButton}/>
-                </div>
+
+                   <Button
+                       name="search-button "
+                       type="submit"
+                       children="Search"
+                       clickHandler={handleSearchButton}/>
             </div>
 
             {showLoader ? <Loader /> : null}
