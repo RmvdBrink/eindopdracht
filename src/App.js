@@ -5,7 +5,7 @@ import Calculator from "./pages/calculator/Calculator";
 import Contact from "./pages/contact/Contact";
 import Disclaimer from"./pages/discalimer/Disclaimer";
 import Faq from "./pages/F-A-Q/Faq";
-import Favourite from "./pages/favourite/Favourite";
+import Favourite from "./pages/favourite/FavouritePage";
 import Search from "./pages/search/Search";
 import SignIn from "./pages/sign-in/SignIn";
 import SignUp from "./pages/sign-up/SignUp";

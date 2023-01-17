@@ -1,5 +1,5 @@
 import React from 'react';
-import "./Favourite.css"
+import "./FavouritePage.css"
 import EMP from "../../assets/demo/EMPANADAS-liggend-1-864x486.jpg"
 import HERf from "../../assets/demo/herfstrecepten_b-340x340.jpg"
 import Las from "../../assets/demo/lasagne-uit-de-pan.jpg"
@@ -7,7 +7,7 @@ import PomHerf from "../../assets/demo/pompoen-herfst-salade-liggend-864x486.jpg
 import Rijst from "../../assets/demo/rijst-met-pompoen-liggend-864x486.jpg"
 import Champ from "../../assets/demo/salade-met-champignons-2-864x486.jpg"
 
-function Favourite() {
+function FavoritePage() {
     return (
         <div className="background-container">
 
@@ -60,4 +60,4 @@ function Favourite() {
     );
 }
 
-export default Favourite;
+export default FavoritePage;
