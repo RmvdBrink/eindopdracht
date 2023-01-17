@@ -7,6 +7,7 @@ import CheckboxComponent from "../../components/chekbox-component/CheckboxCompon
 import DietsCheckboxComponent from "../../components/chekbox-component/diets-components/DietsCheckboxComponent";
 import InputComponent from "../../components/input component/InputComponent";
 import {RecipesContext} from "../../context/RecipesContext";
+import SearchContainer from "../../components/serche-container-component/SearcheContainerComponent";
 // import { useForm} from "react-hook-form";
 
 
