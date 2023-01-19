@@ -9,6 +9,8 @@ import InputComponent from "../../components/input component/InputComponent";
 import {RecipesContext} from "../../context/RecipesContext";
 import SearchContainer from "../../components/serche-container-component/SearcheContainerComponent";
 import NotificationTab from "../../components/notification-tab/NotificationTab";
+import {AuthContext} from "../../context/AuthContext";
+
 // import { useForm} from "react-hook-form";
 
 
@@ -27,15 +29,17 @@ function Search() {
     const [maxCalories, setMaxCalories] = useState("");
     const [showNotificationTab, setShowNotificationTab] = useState(false);
     const [hideLoader, setHideLoader] = useState(false);
+    const [showFilter, setShowFilter] = useState(false);
+
 
     const { recipes, setRecipes } = useContext(RecipesContext);
-
+    const { isAuth } = useContext(AuthContext);
 
     // const allergenToExclude = selectedAllergen.map(allergen => allergen.toString()).join(",");
     // const dietsToExclude = selectedDiet.map(diet => diet.toString()).join(",");
 
-    const allergenToExclude = selectedAllergen.join(",hallo");
-    const dietsToExclude = selectedDiet.join(",");
+    const allergenToExclude = selectedAllergen.join("&");
+    const dietsToExclude = selectedDiet.join("&");
     //function that requests min and max kcal for recpten filter
     const calorieRange = ("calories=")
     const combineMinMaxCalorie = minCalories.toString().concat('-',  maxCalories.toString());
@@ -44,38 +48,64 @@ function Search() {
     if (totalCalorieRange === "calories=-") {
         totalCalorieRange= "";
     }
+    const toggleFilter = () => {
+        setShowFilter(!showFilter);
+    };
+    // const searchForRecipes = async (query) => {
+    //     if (query === "") return;
+    //
+    //     // resetting hide loader
+    //     setHideLoader(false);
+    //     toggleLoading(true)
+    //
+    //     const requestURL = getRecipesSearchRequestRL(query);
+    //     const searchRecipes = await fetch(requestURL);
+    //     const returnedRecipes = await searchRecipes.json();
+    //     toggleError(true)
+    //
+    //     if (returnedRecipes.to === 0) {
+    //         setShowNotificationTab(true);
+    //
+    //     } else {
+    //         const recipes = getRequiredRecipesData(returnedRecipes.hits);
+    //         setRecipes(recipes);
+    //         toggleError(false);
+    //     }
+    //     // used in SearchContainer and HealthyFoods components to hide loader when recipes are found
+    //     setHideLoader(true);
+    //     toggleLoading(false);
+    // }
+    // Returns URL used to fetch recipes from edamam recipe search api
+// using the required environment variables id and key which are stored in .env file
+//     const getRecipesSearchRequestRL = (query) => {
+//         return `https://api.edamam.com/api/recipes/v2?type=public&q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}&${dietsToExclude}&${allergenToExclude}&${totalCalorieRange}`
+//     }
+
 
     const searchForRecipes = async (query) => {
         if (query === "") return;
-        toggleError(true)
 
         // resetting hide loader
-        setHideLoader(false);
-        toggleLoading(true)
-        const requestURL = getRecipesSearchRequestRL(query);
-        const searchRecipes = await fetch(requestURL);
-        const returnedRecipes = await searchRecipes.json();
+        setHideLoader(true);
+        // toggleLoading(true)
 
-        if (returnedRecipes.to === 0) {
-            setShowNotificationTab(true);
-        } else {
-            const recipes = getRequiredRecipesData(returnedRecipes.hits);
+        try {
+            toggleError(false);
+            const response = await axios.get(`https://api.edamam.com/api/recipes/v2?type=public&q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}&${dietsToExclude}&${allergenToExclude}&${totalCalorieRange}`);
+            const recipes = getRequiredRecipesData(response.data.hits);
             setRecipes(recipes);
-
+            toggleError(false);
+        } catch (e) {
+            toggleError(true)
         }
         // used in SearchContainer and HealthyFoods components to hide loader when recipes are found
-        setHideLoader(true);
-        toggleLoading(false)
-        toggleError(false)
-
+        setHideLoader(false);
+        // toggleLoading(false);
     }
+    console.log(hideLoader)
 
 
-    // Returns URL used to fetch recipes from edamam recipe search api
-// using the required environment variables id and key which are stored in .env file
-    const getRecipesSearchRequestRL = (query) => {
-        return `https://api.edamam.com/api/recipes/v2?type=public&q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}&${dietsToExclude}&${allergenToExclude}&${totalCalorieRange}`
-    }
+
 
     const getRequiredRecipesData = (recipes) => {
         return recipes.map((recipe) => {
@@ -83,23 +113,20 @@ function Search() {
                 recipe.recipe.images.LARGE.url :
                 recipe.recipe.images.REGULAR.url ;
 
-                return {
-                    name: recipe.recipe.label,
-                    prepTime: recipe.recipe.totalTime,
-                    ingredients: recipe.recipe.ingredientLines,
-                    calories: recipe.recipe.calories,
-                    cuisineType: recipe.recipe.cuisineType,
-                    mealType: recipe.recipe.mealType,
-                    dishType: recipe.recipe.dishType,
-                    uri: recipe.recipe.uri,
-                    image: recipe.recipe.images.SMALL.url,
-                    largeImage: largeImage
-                }
-            });
+            return {
+                name: recipe.recipe.label,
+                prepTime: recipe.recipe.totalTime,
+                ingredients: recipe.recipe.ingredientLines,
+                calories: recipe.recipe.calories,
+                cuisineType: recipe.recipe.cuisineType,
+                mealType: recipe.recipe.mealType,
+                dishType: recipe.recipe.dishType,
+                uri: recipe.recipe.uri,
+                image: recipe.recipe.images.SMALL.url,
+                largeImage: largeImage
             }
-
-
-
+        });
+    }
     // useEffect(() => {
     //     const controller = new AbortController();
     //
@@ -135,7 +162,7 @@ function Search() {
 
     const getSearch = e => {
         e.preventDefault();
-        searchForRecipes()
+        // searchForRecipes()
         setSearch("");
         setMaxCalories("")
         setMinCalories("")
@@ -175,6 +202,9 @@ function Search() {
 
                 <h2>Recipes Search page</h2>
                 <p> Find healthy recipes that contributes to your daily life!</p>
+                {showNotificationTab ? <NotificationTab text="No recipes found for your search" setShowNotificationTab={setShowNotificationTab} /> : null}
+            </div>
+            <div className="content-container-search1-title-text">
 
             </div>
             {error && <p>Something went wrong while retrieving the data</p>}
@@ -183,34 +213,50 @@ function Search() {
                     <form onSubmit={getSearch} >
                     <SearchContainer searchForRecipes={searchForRecipes} hideLoader={hideLoader}/>
 
-                        <div className="min-max-input-field-kcal">
+                        <div>
+                            {isAuth ?
+                                <div className="content-container-search2-button">
+                                    <Button
+                                        name="material-symbols-outlined"
+                                        clickHandler={toggleFilter}
+                                        children="filter_list"/>
+                                    Search filter:
+                                </div>: <p></p>
+                            }
+                            <div className="min-max-input-field-kcal" style={{ display: showFilter ? "block" : "none" }}>
+                                <label className="kcal-label" htmlFor="min-kcal">
+                                    Min-kcal
+                                </label>
+                                <input
+                                    type="text"
+                                    id="kcal"
+                                    name="kcal"
+                                    placeholder="min value 100 kcal"
+                                    value={minCalories}
+                                    onChange={(e) => setMinCalories(e.target.value)}
+                                />
 
-                            <label className="kcal-label" htmlFor="min-kcal">Min-kcal</label>
-                            <input
-                            type="text"
-                            id="kcal"
-                            name="kcal"
-                            placeholder="min value 100 kcal"
-                            value={minCalories} onChange={(e) => setMinCalories(e.target.value)} />
-
-                            <label className="kcal-label" htmlFor="max-kcal">Max-Kcal</label>
-                            <input
-                            type="text"
-                            id="kcal"
-                            name="kcal"
-                            placeholder="max value 3000 kcal"
-                            value={maxCalories} onChange={(e) => setMaxCalories(e.target.value)} />
-
-                            {console.log(minCalories)}
-                            {console.log(maxCalories)}
-                            {console.log(totalCalorieRange)}
-
+                                <label className="kcal-label" htmlFor="max-kcal">
+                                    Max-Kcal
+                                </label>
+                                <input
+                                    type="text"
+                                    id="kcal"
+                                    name="kcal"
+                                    placeholder="max value 3000 kcal"
+                                    value={maxCalories}
+                                    onChange={(e) => setMaxCalories(e.target.value)}
+                                />
+                                {console.log(minCalories)}
+                                {console.log(maxCalories)}
+                                {console.log(totalCalorieRange)}
+                            </div>
                         </div>
-                        <label className="search-label" htmlFor="allergens">allergies</label>
-                        <div className="checkbox-content-container-search2">
+                        <label className="search-label" htmlFor="allergens" style={{ display: showFilter ? "flex" : "none" }}>allergies</label>
+                        <div className="checkbox-content-container-search2" style={{ display: showFilter ? "flex" : "none" }}>
                         {/* Maak het radiobox-menu voor allergenen */}
 
-                            <span className="cel1">
+                            <span className="cel1" style={{ display: showFilter ? "flex" : "none" }}>
 
 
 
@@ -287,7 +333,7 @@ function Search() {
                             />
 
                             </span>
-                            <span className="cel2">
+                            <span className="cel2" style={{ display: showFilter ? "flex" : "none" }}>
                             <CheckboxComponent
                                 label="shellfish"
                                 type="checkbox"
@@ -363,11 +409,11 @@ function Search() {
                         {/*{console.log(allergenToExclude)}*/}
 
                         {/* Maak het radiobox-menu voor diets */}
-                        <label className="search-label" htmlFor="diets">Diets</label>
-                        <div className="checkbox-content-container-search2">
+                        <label className="search-label" htmlFor="diets" style={{ display: showFilter ? "flex" : "none" }}>Diets</label>
+                        <div className="checkbox-content-container-search2" style={{ display: showFilter ? "flex" : "none" }}>
 
 
-                            <span className="cel1">
+                            <span className="cel1" style={{ display: showFilter ? "flex" : "none" }}>
 
 
 
@@ -472,7 +518,7 @@ function Search() {
                             />
 
                              </span>
-                            <span className="cel2">
+                            <span className="cel2" style={{ display: showFilter ? "flex" : "none" }}>
 
                             <DietsCheckboxComponent
                                 label="low-potassium"

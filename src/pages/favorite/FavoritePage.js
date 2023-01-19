@@ -19,15 +19,14 @@ const FavoritePage= () => {
     return (
         <div className="background-container">
 
-            <div className="outer-content-container-favourite">
-                <div className="title-container-favourite">
-                    <h2>My favourite recipes</h2>
+            <div className="outer-content-container-favorite">
+                <div className="content-container-search2">
+                    <h2>My favorite recipes</h2>
                     <p>Welcome to our favorite recipes page! Here, you'll find a collection of dishes that we have tried and loved. From hearty main courses to delicious desserts, we have something for every occasion. Whether you're a seasoned home cook or just starting out, we hope you'll find inspiration in these recipes.</p>
                 </div>
-                    <div className="title-container-favourite-text">
-                        <NoFavoritesFound favoritesFound={favoritesFound} />
-                </div>
-                <section className="inner-content-container-favourite">
+
+                <section className="inner-content-container-favorite4">
+                    <NoFavoritesFound favoritesFound={favoritesFound} />
                     <SearchCard recipes={favorites}/>
 
                 </section>

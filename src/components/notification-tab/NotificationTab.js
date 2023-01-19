@@ -5,11 +5,11 @@ import React, { useEffect} from 'react';
 
 const NoRecipesFound = ({ text, setShowNotificationTab}) => {
 
-    // Remove tab after 2.5 seconds of display
+    // Remove tab after 3 seconds of display
     useEffect(() => {
         setTimeout(() => {
             setShowNotificationTab(false);
-        }, 2500)
+        }, 3000)
     }, [setShowNotificationTab]);
 
     return(

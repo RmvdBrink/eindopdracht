@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import "./SearchCard.css"
-
 import RecipeCard from "../Recipe-card/RecipeCard";
+import IndexCard from "../index-card/IndexCard";
+import Recipe from "../index-card/IndexCard";
 
-const SearchCard = ({ recipes, title}) => {
+const SearchCard = ({ recipes }) => {
     const [recipeIndex, setRecipeIndex] = useState('');
     const [clickedRecipe, setCLickedRecipe] = useState('');
     const [showClickedRecipe, setShowClickedRecipe] = useState(false);
@@ -41,7 +42,7 @@ const SearchCard = ({ recipes, title}) => {
                 }
 
             </section>
-            <section className="content-container-search4">
+            <section className="content-container-search4 ">
             {
                 // renders RecipeFullView when setShowClickedRecipe() is set to True
                 showClickedRecipe && <RecipeCard
@@ -56,39 +57,41 @@ const SearchCard = ({ recipes, title}) => {
     )
 }
 
-// When a recipe is clicked the index of clicked recipe is passed to the parent element using setRecipeIndex
-// then the function inside the useEffect in RecipesList runs when recipe index is updated upon click
-const Recipe = ({ title, image, index, setRecipeIndex}) => {
-    return(
-        <div className="container-search-card" onClick={() => setRecipeIndex(index)}>
-            <div className="recipe-image" >
-                <img src={image} alt={title}/>
-                <div className="overlay"></div>
-            </div>
-
-            <div className="recipe-title">
-                <p>{formatRecipeTitle(title)}</p>
-            </div>
-        </div>
-    )
-}
-
-// Formatting recipe title if title length is more than 18 (11 in mobile screen) characters replace additional characters with ".."
-// to avoid messing up the recipe container design
-const formatRecipeTitle = (title) => {
-    const screenWidth = document.body.offsetWidth;
-    const titleLength = title.length;
-
-    if ((screenWidth > 1024 && titleLength <= 18) ||
-        (screenWidth <= 769 && titleLength <= 11))
-    {
-        return title;
-    }
-
-    return screenWidth > 769 ?
-        title.substring(0, 17) + ".." :
-        title.substring(0, 10) + "..";
-}
-
+                    <IndexCard />
+//
+// // When a recipe is clicked the index of clicked recipe is passed to the parent element using setRecipeIndex
+// // then the function inside the useEffect in RecipesList runs when recipe index is updated upon click
+// const Recipe = ({ title, image, index, setRecipeIndex}) => {
+//     return(
+//         <div className="container-search-card" onClick={() => setRecipeIndex(index)}>
+//             <div className="recipe-image" >
+//                 <img src={image} alt={title}/>
+//                 <div className="overlay"></div>
+//             </div>
+//
+//             <div className="recipe-title">
+//                 <p>{formatRecipeTitle(title)}</p>
+//             </div>
+//         </div>
+//     )
+// }
+//
+// // Formatting recipe title if title length is more than 18 (11 in mobile screen) characters replace additional characters with ".."
+// // to avoid messing up the recipe container design
+// const formatRecipeTitle = (title) => {
+//     const screenWidth = document.body.offsetWidth;
+//     const titleLength = title.length;
+//
+//     if ((screenWidth > 1024 && titleLength <= 18) ||
+//         (screenWidth <= 769 && titleLength <= 11))
+//     {
+//         return title;
+//     }
+//
+//     return screenWidth > 769 ?
+//         title.substring(0, 17) + ".." :
+//         title.substring(0, 10) + "..";
+// }
+//
 
 export default SearchCard;

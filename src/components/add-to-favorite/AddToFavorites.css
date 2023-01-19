@@ -1,0 +1,8 @@
+.add-to-favorite-container {
+    display: flex;
+    flex-direction:revert;
+    justify-content: center;
+    align-items: center;
+    color: var(--button-color);
+
+}

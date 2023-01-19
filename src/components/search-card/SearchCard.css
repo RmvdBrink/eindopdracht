@@ -31,7 +31,9 @@
     flex-shrink: 1;
     flex-wrap: wrap;
     flex-basis: 501px;
-    border: #073daf solid 3px;
+    border: gold solid 3px;
     text-align: center;
-    background-color: var(--background-color);
+
+
+    cursor: default;
 }

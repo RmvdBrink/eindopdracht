@@ -62,6 +62,9 @@
     border: #073daf solid 3px;
     text-align: center;
 
+
 }
 
-
+.content-container-recipe3 p {
+    cursor: default;
+}

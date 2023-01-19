@@ -103,5 +103,31 @@
     border: #073daf solid 3px;
     text-align: center;
     background-color: var(--background-color);
+
 }
 
+
+ .material-symbols-outlined {
+     font-variation-settings:
+             'FILL' 1,
+             'wght' 500,
+             'GRAD' 0,
+             'opsz' 48
+ }
+.content-container-search2-button {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+    width: 20vw;
+    margin: 10px 10px 10px 80px;
+    border: solid 1px var(--primary);
+    border-radius: 10px;
+    background-color: var(--background-color);
+}
+/* p:hover {*/
+/*    !*color: var(--secondary);*!*/
+
+/*    text-decoration-line: underline;*/
+
+/*}*/
