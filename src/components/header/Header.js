@@ -27,9 +27,10 @@ function Header() {
                            name="button-logout"
                            type="onclick"
                            clickHandler={logout}
-                           children="logout"
-
+                           children="log out"
+                           logout
                        />
+
                        </>
                            :
                        <li><NavLink to="/sign-in">Sign in</NavLink></li>
@@ -48,7 +49,7 @@ function Header() {
                    <li><NavLink to="/kcal-calculator">Calculator</NavLink></li>
                    <li><NavLink to="/contact">Contact</NavLink></li>
                    {isAuth ?
-                   <li>< NavLink to="/favourite">Favourite </NavLink></li>
+                   <li>< NavLink to="/favorite-page">Favorite </NavLink></li>
                        : ""}
                </ul>
            </nav>
