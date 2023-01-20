@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext, useState} from 'react';
 import "./SignUp.css"
 import "../../App.css"
 import {useForm} from "react-hook-form";
@@ -6,44 +6,45 @@ import Button from "../../components/button/Button";
 import {Link, useNavigate} from "react-router-dom";
 import InputComponent from "../../components/input component/InputComponent";
 import axios from "axios";
+import {AuthContext} from "../../context/AuthContext";
+import Loader from "../../components/loader-compenent/LoaderComponent";
 
 function SignUp() {
 
+    const [error, toggleError] = useState(false);
+    const [loading, toggleLoading] = useState(false);
+
     const { handleSubmit, formState: { errors },register  } = useForm();
 
-const navigate = useNavigate();
-    // function handleFormSubmit(data) {
-    //     console.log(data)
-    //     console.log({
-    //         email: data.email,
-    //         password: data.password,
-    //         username: data.username,
-    //     })
-    // }
+    const { login } = useContext(AuthContext);
 
-    async function handleFormSubmit(data) {
+    const navigate = useNavigate();
 
-        // toggleError(false);
-        // toggleLoading(true);
+
+    async function handleFormSubmit(data, e) {
+        e.preventDefault(e);
+        toggleError(false);
+        toggleLoading(true);
 
         try {
             const response = await axios.post(`https://frontend-educational-backend.herokuapp.com/api/auth/signup`, {
-                "username": data.username,
-                "email": data.email,
-                "password": data.password,
-                "role": ["user", "admin"]
+                username: data.username,
+                email: data.email,
+                password: data.password,
+                role: ["user", "admin"]
 
 
             })
 
             console.log(response)
-            navigate("/sign-in")
+            // login(response.data.accessToken)
+            navigate("/search")
 
         } catch (e) {
             console.error(e.response)
-            // toggleError(true);
+            toggleError(true);
         }
-        // toggleLoading(false);
+        toggleLoading(false);
     }
 
 
@@ -54,7 +55,7 @@ const navigate = useNavigate();
         <div  className="outer-content-container-sign-up">
             <section className="inner-content-container-sign-up">
                 <article className="content-container-sign-up">
-
+                    {loading && Loader}
                     <form onSubmit={handleSubmit(handleFormSubmit)} className="sign-up-form">
                         <h5><strong>Sign Up</strong> </h5>
                         <p>please enter your emailadres, username and password</p>
@@ -143,7 +144,7 @@ const navigate = useNavigate();
                         />
                         </span>
 
-
+                        {error && <p className="errors">This account already exists. Try another email address.</p>}
                         <p>if you already have an account click on <Link to="/sign-in">sign in</Link> to log in</p>
                         <p>forgot you password</p>
                     </form>

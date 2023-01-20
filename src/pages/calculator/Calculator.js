@@ -19,14 +19,14 @@ function Calculator() {
     const [query, setQuery] = useState("")
     const [loading, toggleLoading] = useState(false);
 
-    const preUrl = "nutrition-type=cooking&ingr=";
-    let combineUrl = preUrl.concat(query);
+    // const preUrl = "nutrition-type=cooking&ingr=";
+    // let combineUrl = preUrl.concat(query);
+    //
+    // if (combineUrl === "nutrition-type=cooking&ingr=") {
+    //     combineUrl = "";
+    // }
 
-    if (combineUrl === "nutrition-type=cooking&ingr=") {
-        combineUrl = "";
-    }
-
-    console.log(combineUrl)
+    // console.log(combineUrl)
 
 
     useEffect(() => {
@@ -66,7 +66,7 @@ function Calculator() {
             controller.abort();
 
         }
-    }, [combineUrl]);
+    }, []);
 
     const updateSearch = e => {
         setSearch(e.target.value);

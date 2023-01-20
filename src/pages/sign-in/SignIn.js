@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import "./SignIn.css"
 import "../../App.css"
 import {useForm} from "react-hook-form";
@@ -10,24 +10,22 @@ import axios from "axios";
 
 function SignIn() {
 
+    const [error, toggleError] = useState(false);
     const { login } = useContext(AuthContext);
 
     const { handleSubmit, formState: { errors },register  } = useForm();
 
     const navigate = useNavigate();
 
-    async function handleFormSubmit(data) {
+    async function handleFormSubmit(data, e) {
+        e.preventDefault(e)
+        toggleError(false);
 
-        // toggleError(false);
-        // toggleLoading(true);
 
         try {
             const response = await axios.post(`https://frontend-educational-backend.herokuapp.com/api/auth/signin`, {
-                "username": data.username,
-                "password": data.password,
-
-
-
+                username: data.username,
+                password: data.password,
             })
 
             console.log(response)
@@ -36,9 +34,9 @@ function SignIn() {
 
         } catch (e) {
             console.error(e.response)
-            // toggleError(true);
+            toggleError(true);
         }
-        // toggleLoading(false);
+
     }
 
     //
@@ -122,7 +120,7 @@ function SignIn() {
                         />
                         </span>
 
-
+                        {error && <p className="errors">Combination of email address and password is incorrect</p>}
                         <p>no account yet click on <Link to="/sign-up">sign up</Link> to create a new one</p>
                         <p>forgot you password</p>
                     </form>

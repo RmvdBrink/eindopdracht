@@ -54,6 +54,7 @@
     border: solid 3px var(--primary);
     border-radius: 25px;
     box-shadow: .25rem .5rem 1rem 0 rgba(0, 0, 0, 0.1);
+    background-color: var(--background-color);
 }
 .button-field {
     display: flex;
