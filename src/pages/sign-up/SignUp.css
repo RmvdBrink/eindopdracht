@@ -1,6 +1,6 @@
 .outer-content-container-sign-up {
 
-    background: url("../../assets/layered-waves-haikei.svg") no-repeat center center fixed;
+    background: url("../../assets/background-sign-up-6546181 (1).jpg") no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -54,6 +54,7 @@
     border: solid 3px var(--primary);
     border-radius: 25px;
     box-shadow: .25rem .5rem 1rem 0 rgba(0, 0, 0, 0.1);
+    background-color: var(--background-color);
 }
 
 .button-field {

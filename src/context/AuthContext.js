@@ -1,23 +1,51 @@
-import React, {createContext, useState} from 'react';
+import React, {createContext, useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import axios from "axios";
+import floorExpDate from "../helpers/floorExpDate";
 
 export const AuthContext = createContext({});
 
 function AuthContextProvider({children}) {
+
+
     const [isAuth, toggleIsAuth] = useState({
         isAuth: false,
         user: null,
+        status: "pending"
     });
 
     // console.log(isAuth)
     const navigate = useNavigate();
 
-    // const email = {data: {email}}
+    useEffect(() => {
 
-    function signIn(jwt, email) {
-        toggleIsAuth({isAuth: true, user: email});
+        const storedToken = localStorage.getItem("token")
+
+        if (storedToken) {
+            const decodedToken = jwtDecode(storedToken)
+
+            if ( Math.floor( Date.now() / 1000 ) < decodedToken.exp )
+                console.log( "De gebruiker is NOG STEEDS ingelogd 🔓" )
+
+            void fetchData(storedToken, decodedToken.sub)
+            console.log(decodedToken)
+        }
+        else {
+            console.log( "De gebruiker is UITGELOGD 🔒" )
+            localStorage.removeItem("token")
+            toggleIsAuth({
+                isAuth: false,
+                user: null,
+                status: "done",
+            })
+        }
+
+
+    }, [])
+
+    function signIn(jwt) {
+        toggleIsAuth({isAuth: true});
         localStorage.setItem("token", jwt)
         const deCodeToken = jwtDecode(jwt)
         navigate("/search")
@@ -25,7 +53,7 @@ function AuthContextProvider({children}) {
         console.log(jwt)
         console.log("gebruiker is ingelogd")
 
-        fetchData(jwt, deCodeToken.sub)
+        void fetchData(jwt, deCodeToken.sub)
     }
     // ${id}
     async function fetchData(token) {
@@ -47,6 +75,7 @@ function AuthContextProvider({children}) {
                     id: response.data.id,
                     // roles:data.roles[0].name
                 },
+                status: "done"
             });
 
 
@@ -58,8 +87,13 @@ function AuthContextProvider({children}) {
 
 
     function signOut() {
-        localStorage.clear()
-        toggleIsAuth({isAuth: false, user: null});
+        localStorage.removeItem("token")
+        toggleIsAuth({
+            isAuth: false,
+            user: null,
+            status: "done"
+        });
+
         console.log("De gebruiker is uitgelogd")
         navigate("/")
     }
@@ -74,6 +108,7 @@ function AuthContextProvider({children}) {
 
     return (
         <AuthContext.Provider value={data}>
+            {/*{isAuth.status === "done" ? children : <p>Loading...</p> }*/}
             {children}
         </AuthContext.Provider>
 
