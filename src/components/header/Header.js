@@ -27,9 +27,10 @@ function Header() {
                            name="button-logout"
                            type="onclick"
                            clickHandler={logout}
-                           children="logout"
-
+                           children="log out"
+                           logout
                        />
+
                        </>
                            :
                        <li><NavLink to="/sign-in">Sign in</NavLink></li>

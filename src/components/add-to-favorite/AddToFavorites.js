@@ -2,6 +2,7 @@ import React, {useContext, useState, useEffect, useCallback} from 'react';
 import {FavoritesContext} from '../../context/Favorites'
 import "./AddToFavorites.css"
 import {AuthContext} from "../../context/AuthContext";
+import {Link} from "react-router-dom";
 
 // eslint-disable-next-line react-hooks/rules-of-hooks
 
@@ -63,7 +64,7 @@ const AddToFavorites = ({recipe}) => {
             </p>
             </React.Fragment>
             ) : (
-            <p>Please log in to add to favorites</p>
+            <Link to="/sign-in"><p>Please log in to add to favorites</p></Link>
             )}
             </React.Fragment>
 

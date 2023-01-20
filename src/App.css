@@ -39,6 +39,7 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
     font-size: 65px;
     text-align: center;
+    z-index: 1;
 }
 
 h2 {
@@ -75,10 +76,12 @@ h6 {
     --background-color: #fbf9f9bf;
     --primary-light-green: #f0fded;
     --button-color: #b5f782;
+    --button-color-2:#4CAF50;
     --black: #292929;
     --white: #ffffff;
     --error: #f62b11;
     /*#5A5656*/
+
 
 }
 /* --------------- 3.2 Other --------------------------- */
@@ -87,6 +90,7 @@ h6 {
     position: absolute;
     top: 0;
     left:0;
+    z-index: 0;
 }
 
 form label {

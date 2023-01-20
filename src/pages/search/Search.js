@@ -10,6 +10,7 @@ import {RecipesContext} from "../../context/RecipesContext";
 import SearchContainer from "../../components/serche-container-component/SearcheContainerComponent";
 import NotificationTab from "../../components/notification-tab/NotificationTab";
 import {AuthContext} from "../../context/AuthContext";
+import {Link} from "react-router-dom";
 
 // import { useForm} from "react-hook-form";
 
@@ -199,10 +200,13 @@ function Search() {
     <main className="outer-content-container-search">
         <section className="inner-content-container-search">
             <div className="content-container-search1">
-
+                <div className="content-title-container-search1">
                 <h2>Recipes Search page</h2>
                 <p> Find healthy recipes that contributes to your daily life!</p>
+                <p>Welcome to the Recipes Search page, where you can find healthy recipes that contribute to your daily life! As a user, you can always search for recipes using a keyword, but to make use of the full functionality of the page, you will need to log in. </p>
+                    <p> Once logged in, you will have access to search filters for dietary restrictions and allergies, and the ability to save your favorite recipes for easy access later. Enjoy!</p>
                 {showNotificationTab ? <NotificationTab text="No recipes found for your search" setShowNotificationTab={setShowNotificationTab} /> : null}
+                </div>
             </div>
             <div className="content-container-search1-title-text">
 
@@ -216,16 +220,15 @@ function Search() {
                         <div>
                             {isAuth ?
                                 <div className="content-container-search2-button">
-                                    <Button
-                                        name="material-symbols-outlined"
+                                    <Button name="material-symbols-outlined"
                                         clickHandler={toggleFilter}
                                         children="filter_list"/>
-                                    Search filter:
-                                </div>: <p></p>
+                                    Search filter :
+                                </div>:<Link to="/sign-in"> <p className="material-symbols-outlined">nutrition click to sign in</p></Link>
                             }
                             <div className="min-max-input-field-kcal" style={{ display: showFilter ? "block" : "none" }}>
-                                <label className="kcal-label" htmlFor="min-kcal">
-                                    Min-kcal
+                                <label className="kcal-label" htmlFor="min-kcal ">
+                                    Min-kcal :
                                 </label>
                                 <input
                                     type="text"
@@ -237,7 +240,7 @@ function Search() {
                                 />
 
                                 <label className="kcal-label" htmlFor="max-kcal">
-                                    Max-Kcal
+                                    Max-Kcal :
                                 </label>
                                 <input
                                     type="text"
@@ -252,7 +255,7 @@ function Search() {
                                 {console.log(totalCalorieRange)}
                             </div>
                         </div>
-                        <label className="search-label" htmlFor="allergens" style={{ display: showFilter ? "flex" : "none" }}>allergies</label>
+                        <label className="search-label" htmlFor="allergens" style={{ display: showFilter ? "flex" : "none" }}>Allergies :</label>
                         <div className="checkbox-content-container-search2" style={{ display: showFilter ? "flex" : "none" }}>
                         {/* Maak het radiobox-menu voor allergenen */}
 
@@ -409,7 +412,7 @@ function Search() {
                         {/*{console.log(allergenToExclude)}*/}
 
                         {/* Maak het radiobox-menu voor diets */}
-                        <label className="search-label" htmlFor="diets" style={{ display: showFilter ? "flex" : "none" }}>Diets</label>
+                        <label className="search-label" htmlFor="diets" style={{ display: showFilter ? "flex" : "none" }}>Diets :</label>
                         <div className="checkbox-content-container-search2" style={{ display: showFilter ? "flex" : "none" }}>
 
 
@@ -625,7 +628,7 @@ function Search() {
                     </form>
 
                 </div>
-            <div className="content-container-search3">
+            {recipes.length > 0 ? <div className="content-container-search3">
 
             {recipes.length > 0 ? <SearchCard recipes={recipes}/> : null}
             {showNotificationTab ? <NotificationTab text="No recipes found for your search" setShowNotificationTab={setShowNotificationTab} /> : null}
@@ -642,7 +645,7 @@ function Search() {
 
                 {/*    )*/}
                 {/*})}*/}
-            </div>
+            </div> : null}
         </section>
     </main>
 

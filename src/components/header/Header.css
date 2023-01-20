@@ -22,12 +22,13 @@ header li {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    flex-basis: 780px;
+    flex-basis: 900px;
     flex-wrap: wrap;
     color: var(--primary);
     font-size: 22px;
     list-style: none;
     text-decoration-line: none;
+    z-index: 1;
 
 /*    basis was hier 1200 780 proberen voor laptop */
 }
@@ -40,20 +41,38 @@ header li {
     color: var(--primary);
     font-size: 22px;
     text-decoration-line: none;
+    z-index: 1;
 }
 
 
 
 .ulh li > a {
-    margin: 0 40px 0 80px;
+    margin: 0 40px 0 150px;
     color: var(--primary);
     font-size: 22px;
     list-style: none;
     text-decoration-line: none;
 }
+.ulh li > a:hover {
+    color: var(--secondary-a);
 
+}
 .login-email-user {
     color: black;
     font-size: 10px;
 
+}
+
+.button-logout {
+    padding: 12px 20px;
+    border: none;
+    background-color: var(--button-color-2);
+    color: var(--white);
+    border-radius: 110px 40px 110px 40px;
+    cursor: pointer;
+    float: right;
+ }
+.button-logout:hover {
+    background-color: var(--button-color);
+    color: var(--black);
 }
