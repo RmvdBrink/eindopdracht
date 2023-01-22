@@ -88,14 +88,17 @@ padding: 10px;
     flex-grow: 0;
     flex-shrink: 1;
     flex-wrap: wrap;
-    width:  400px;
-    height: 150px;
+    width:  60vw;
+    height: 70vw;
     border:  solid 1px var(--secondary);
     border-radius: 10px;
     text-align: center;
-    background-color: var(--secondary-light);
+    background-color: var(--background-color);
 }
-
+.text-field-calculator {
+    width: 100%;
+    background-color: var(--background-color);
+}
 .form-item {
     display: flex;
     flex-direction: row;

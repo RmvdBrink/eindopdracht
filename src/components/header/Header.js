@@ -22,7 +22,7 @@ function Header() {
                <ul className="ulh">
                    {isAuth ?
                        <>
-                       {/*<span>{user.email}</span>*/}
+                    <div className="logout-box">
                        <Button
                            name="button-logout"
                            type="onclick"
@@ -30,11 +30,12 @@ function Header() {
                            children="log out"
                            logout
                        />
-
+                           <span>{user.username}</span>
+                           <span>{user.email}</span>
+                    </div>
                        </>
                            :
                        <li><NavLink to="/sign-in">Sign in</NavLink></li>
-
 
                    }
                </ul>

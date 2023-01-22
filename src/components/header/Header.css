@@ -57,11 +57,6 @@ header li {
     color: var(--secondary-a);
 
 }
-.login-email-user {
-    color: black;
-    font-size: 10px;
-
-}
 
 .button-logout {
     padding: 12px 20px;
@@ -69,10 +64,26 @@ header li {
     background-color: var(--button-color-2);
     color: var(--white);
     border-radius: 110px 40px 110px 40px;
+    margin: 0 40px 0 120px;
     cursor: pointer;
     float: right;
  }
 .button-logout:hover {
     background-color: var(--button-color);
     color: var(--black);
+}
+
+.logout-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-basis: 10vw;
+    height: 30px;
+}
+.logout-box span {
+    text-align: right;
+    margin: 5px 45px 0 0 ;
+    color: var(--primary);
+    font-size: 16px;
+    text-decoration: underline var(--button-color-2);
 }

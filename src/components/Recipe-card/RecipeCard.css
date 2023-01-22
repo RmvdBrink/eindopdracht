@@ -45,16 +45,18 @@
 }
 .recipe-card img {
     width: 20vw;
-    margin: 50px 0;
+    margin-top: 50px;
     box-shadow: .25rem .5rem 1rem 0 rgba(0, 0, 0, 0.3);
 }
 
 .name {
-    color: var(--secondary-a);
+    color: var(--secondary);
 
 }
 .recipe-card h6 {
-    padding: 5px 0;
+    font-size: 22px;
+    margin: 30px 0;
+
 }
 .recipe-card p {
     padding: 10px 0;

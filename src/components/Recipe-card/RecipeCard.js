@@ -14,28 +14,30 @@ const RecipeCard = ({ recipe }) => {
                 <img src={recipe.image} alt={recipe.name}/>
                 <div className="info">
                     <h6 className="title">{recipe.name}</h6>
-                    <p className="name">Preparation time</p>
+                    <p className="name">Preparation time :</p>
 
                     {/* show prep time if more than 0 */}
                     <p className="description">{recipe.prepTime > 0 ? `${recipe.prepTime} minute(s)` : '-'}</p>
 
-
+                    <p className="name">Cuisine :</p>
                     <p className="description">{recipe.cuisineType}</p>
-                    <p className="name">Cuisine</p>
 
+
+                    <p className="name">Meal Type :</p>
                     <p className="description">{recipe.mealType}</p>
-                    <p className="name">Meal Type</p>
 
+
+                    <p className="name">Dish Type :</p>
                     <p className="description">{recipe.dishType}</p>
-                    <p className="name">Dish Type</p>
+
 
                     {
                         recipe.ingredients.map((ingredient, i) => {
-                            return <p key={i} className="li-items">~ {ingredient}</p>
+                            return <p key={i} className="li-items"> {ingredient}</p>
                         })
                     }
-                    <p className="name">Calories</p>
-                    <p className="description">{roundCalories(recipe.calories)}</p>
+                    {/*<p className="name">Calories</p>*/}
+                    {/*<p className="description">{roundCalories(recipe.calories)}</p>*/}
                     <div className="add-to-favorite-container">
                     <AddToFavorites recipe={recipe} />
                     </div>
