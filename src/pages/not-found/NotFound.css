@@ -1,0 +1,34 @@
+.outer-content-container-not-found {
+    background: url("../../assets/background-not-found.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-grow: 1;
+    flex-basis: 1400px;
+    flex-wrap: wrap;
+
+}
+
+.inner-content-container-not-found {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-basis: 800px;
+    height: 40vw;
+    border: solid 2px var(--button-color-2);
+    flex-wrap: wrap;
+    border-radius: 10px;
+    background-color: var(--background-color);
+    box-shadow: .25rem .5rem 1rem 0 rgba(0, 0, 0, 0.1);
+}
+.not-found-p {
+    text-align: center;
+}
+
+.redirect {
+    text-align: center;
+}

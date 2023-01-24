@@ -37,6 +37,7 @@
 .content-container-calculator1 h5 {
     font-size: 40px;
 }
+
 .content-container-calculator2 {
     display: flex;
     flex-direction: column;
@@ -50,6 +51,11 @@
     border-radius: 5px;
     border: solid 1px var(--secondary);
 }
+.text-field-calculator {
+    width: 100%;
+    background-color: var(--background-color);
+}
+
 .content-container-calculator3 {
     display: flex;
     flex-direction: row;
@@ -64,22 +70,16 @@
 
 }
 
-.content-container-calculator4 th{
-padding: 10px;
-
-    text-align: start;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    flex-grow: 0;
-    flex-shrink: 1;
-    flex-wrap: wrap;
-    flex-basis: 100vw;
-    border: #f8d02e solid 3px;
-    text-align: center;
-
+.content-container-calculator4  {
+        padding: 10px;
+        text-align: start;
+        flex-grow: 0;
+        flex-shrink: 1;
+        flex-wrap: wrap;
+        flex-basis: 100vw;
+        border: #f8d02e solid 3px;
 }
+
 .outer-content-container-calculator4 {
     display: flex;
     flex-direction: row;
@@ -88,27 +88,31 @@ padding: 10px;
     flex-grow: 0;
     flex-shrink: 1;
     flex-wrap: wrap;
-    width:  40vw;
+    width:  60vw;
     height: 110vw;
     border:  solid 1px var(--secondary);
     border-radius: 10px;
     text-align: center;
     background-color: var(--background-color);
 }
-.table-headers-th {
-    display: flex;
-    flex-direction: row;
+.nob {
+    width: 100px;
+    border: solid 1px var(--button-color-2);
+}
+
+th {
+    text-align: center;
+    font-size: 16px;
+    text-decoration: var(--button-color-2) underline;
+    padding: 6px 0 5px 0;
+    width: 185px;
 
 }
-.text-field-calculator {
-    width: 100%;
-    background-color: var(--background-color);
-}
-.form-item {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-self: baseline;
-    flex-wrap: wrap;
 
+td {
+    text-align: center;
+    border-bottom: solid 2px var(--button-color-2);
+}
+.tab-h5 {
+    width: 250px;
 }
