@@ -46,8 +46,8 @@
     color: var(--secondary-dark);
 }
 .title-container-favorite-text a {
-    color: #027902;
-    text-decoration: var(--white);
+    color: var(--secondary-a);
+    text-decoration: undeline var(--white);
 
 }
 .title-container-favorite-text a:hover {

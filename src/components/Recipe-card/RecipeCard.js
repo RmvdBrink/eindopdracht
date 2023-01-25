@@ -1,16 +1,15 @@
 import React from 'react';
 import "./RecipeCard.css"
 import AddToFavorites from '../add-to-favorite/AddToFavorites';
-import roundCalories from "../../helpers/roundCalories";
 
 
-
+// component which makes the recipe visible at the bottom of the recipe index
 const RecipeCard = ({ recipe }) => {
 
     return (
         <div >
             <div className="recipe-card">
-
+                {/*shows all information of the specific recipe which is requested*/}
                 <img src={recipe.image} alt={recipe.name}/>
                 <div className="info">
                     <h6 className="title">{recipe.name}</h6>
@@ -30,15 +29,15 @@ const RecipeCard = ({ recipe }) => {
                     <p className="name">Dish Type :</p>
                     <p className="description">{recipe.dishType}</p>
 
-
+                    {/*iterate over an array of ingredients and displays them in an unordered list*/}
                     {
                         recipe.ingredients.map((ingredient, i) => {
-                            return <p key={i} className="li-items"> {ingredient}</p>
+                            return <p key={i} className="recipe-card-li"> {ingredient}</p>
                         })
                     }
-                    {/*<p className="name">Calories</p>*/}
-                    {/*<p className="description">{roundCalories(recipe.calories)}</p>*/}
+
                     <div className="add-to-favorite-container">
+                    {/*  adds the save function to the bottom of the recipe  */}
                     <AddToFavorites recipe={recipe} />
                     </div>
                 </div>

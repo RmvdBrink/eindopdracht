@@ -5,11 +5,7 @@
     3. Layout
         3.1 Reusables
         3.2 Other
-    4. Areas
-        4.1 Header
-        4.2 Introduction
-        etc.
-    5. Media Queries
+
 ////////////////////////*/
 /* ------------------------------- 1. Global Styles -------------------------------- */
 @import url('https://fonts.googleapis.com/css2?family=Hepta+Slab:wght@300;500;600;700;800&family=Roboto:wght@400;500;700&display=swap');
@@ -86,7 +82,7 @@ h6 {
 }
 /* --------------- 3.2 Other --------------------------- */
 .logo {
-    width: 250px;
+    width: 220px;
     position: absolute;
     top: 0;
     left:0;
@@ -107,41 +103,6 @@ form label {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    border: #ee2e0b solid 2px;
-    padding: 0 0 0 0;
-
-}
-
-/*De binnenste container is maximaal 1400px breed, zodat het er ook goed uitziet op brede schermen.
-Hij mag krimpen als het scherm minder breed wordt, maar niet groeien als er meer ruimte is.*/
-.inner-content-containers-header {
-    flex-basis: 1400px;
-    flex-shrink: 1;
-    flex-grow: 0;
-    flex-wrap: wrap;
-    /*We voegen margin toe aan de linker- en rechterkant, zodat de content nooit helemaal tegen de rand gedrukt kan worden*/
-    margin: 0 20px;
-    /*We zorgen er ook voor dat deze flex-item op haar beurt ook weer een flexbox container is, waarin alle children onder elkaar komen te staan*/
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: flex-start;
-    border: #ff7124 solid 3px;
-    padding: 20px 0;
-    gap: 110px;
-}
-
-.inner-content-containers-nav {
-    flex-basis: 1400px;
-    flex-shrink: 1;
-    flex-grow: 0;
-    /*We voegen margin toe aan de linker- en rechterkant, zodat de content nooit helemaal tegen de rand gedrukt kan worden*/
-    margin: 0 20px;
-    /*We zorgen er ook voor dat deze flex-item op haar beurt ook weer een flexbox container is, waarin alle children onder elkaar komen te staan*/
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: center;
-    border: #74ff24 solid 3px;
-    padding: 35px 0;
 }
 
 
@@ -151,8 +112,4 @@ Hij mag krimpen als het scherm minder breed wordt, maar niet groeien als er meer
 
 
 
-/* --------------- 4.1 Header ------------------------- */
 
-/* --------------- 4.2 Introduction ------------------- */
-
-/* ------------------------------- 5. Media Queries -------------------------------- */

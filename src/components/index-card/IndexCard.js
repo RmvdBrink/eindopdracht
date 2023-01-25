@@ -1,15 +1,14 @@
-import "./IndexCard.css"
 import React from "react";
-
+import "./IndexCard.css"
 
 // When a recipe is clicked the index of clicked recipe is passed to the parent element using setRecipeIndex
 // then the function inside the useEffect in RecipesList runs when recipe index is updated upon click
-const IndexCard = ({ title, image, index, setRecipeIndex}) => {
-    return(
+const IndexCard = ({title, image, index, setRecipeIndex}) => {
+    return (
         <div className="container-search-card" onClick={() => setRecipeIndex(index)}>
-            <div className="recipe-image" >
+            <div className="recipe-image">
                 <img src={image} alt={title}/>
-                <div className="overlay"></div>
+
             </div>
 
             <div className="recipe-title">
@@ -26,8 +25,7 @@ const formatRecipeTitle = (title) => {
     const titleLength = title.length;
 
     if ((screenWidth > 1024 && titleLength <= 18) ||
-        (screenWidth <= 769 && titleLength <= 11))
-    {
+        (screenWidth <= 769 && titleLength <= 11)) {
         return title;
     }
 

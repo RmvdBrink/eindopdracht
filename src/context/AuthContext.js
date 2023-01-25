@@ -1,6 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import jwt_decode from 'jwt-decode';
 import axios from 'axios';
 
 export const AuthContext = createContext( {} );
@@ -15,14 +14,14 @@ function AuthContextProvider( { children } ) {
 
     // MOUNTING EFFECT
     useEffect( () => {
-        // haal de JWT op uit Local Storage
+        // retrieve the JWT from Local Storage
         const token = localStorage.getItem( 'token' );
 
-        // als er WEL een token is, haal dan opnieuw de gebruikersdata op
+        // if there IS a token, get the user data again
         if ( token ) {
             void fetchData( token );
         } else {
-            // als er GEEN token is doen we niks, en zetten we de status op 'done'
+            // if there is NO token we do nothing, and set the status to 'done'
             toggleIsAuth( {
                 isAuth: false,
                 user: null,
@@ -31,17 +30,19 @@ function AuthContextProvider( { children } ) {
         }
     }, [] );
 
-
+    //function called login that takes in one argument, jwt. The function uses the localStorage.setItem() method
+    // to store the jwt token in the browser's local storage. This allows the user to remain logged in even after the
+    // browser is closed or the page is refreshed.
     function login(jwt) {
-        // toggleIsAuth({isAuth: true});
         localStorage.setItem("token", jwt)
-        console.log(jwt)
+        // console.log(jwt)
         console.log("gebruiker is ingelogd")
-        fetchData(jwt)
+        void fetchData(jwt)
+        // navigate("/search")
     }
-
+    // used to log a user out of the application. The function first uses the removeItem to remove te token.
     function logout() {
-        localStorage.clear();
+        localStorage.removeItem("token");
         toggleIsAuth( {
             isAuth: false,
             user: null,
@@ -53,6 +54,8 @@ function AuthContextProvider( { children } ) {
     }
 
     // Omdat we deze functie in login- en het mounting-effect gebruiken, staat hij hier gedeclareerd!
+    //function calls toggleIsAuth and passed an object with isAuth:false, user:null and status:'done'
+    //navigate function to navigate to the root route '/'homepage
     async function fetchData(token) {
         try {
             const result = await axios.get(`https://frontend-educational-backend.herokuapp.com/api/user`, {
@@ -75,12 +78,10 @@ function AuthContextProvider( { children } ) {
                 status: 'done',
             } );
 
-            // als er een redirect URL is meegegeven (bij het mount-effect doen we dit niet) linken we hiernnaartoe door
-            // als we de history.push in de login-functie zouden zetten, linken we al door voor de gebuiker is opgehaald!
 
         } catch ( e ) {
             console.error( e );
-            // ging er iets mis? Plaatsen we geen data in de state
+            // did something go wrong? We do not place any data in the state
             toggleIsAuth( {
                 isAuth: false,
                 user: null,
@@ -104,122 +105,3 @@ function AuthContextProvider( { children } ) {
 
 export default AuthContextProvider;
 
-// import React, {createContext, useEffect, useState} from 'react';
-// import {useNavigate} from "react-router-dom";
-// import jwtDecode from "jwt-decode";
-// import axios from "axios";
-// import floorExpDate from "../helpers/floorExpDate";
-//
-// export const AuthContext = createContext({});
-//
-// function AuthContextProvider({children}) {
-//
-//
-//     const [isAuth, toggleIsAuth] = useState({
-//         isAuth: false,
-//         user: null,
-//         status: "pending"
-//     });
-//
-//     // console.log(isAuth)
-//     const navigate = useNavigate();
-//
-//     useEffect(() => {
-//
-//         const storedToken = localStorage.getItem("token")
-//
-//         if (storedToken) {
-//             const decodedToken = jwtDecode(storedToken)
-//
-//             if ( Math.floor( Date.now() / 1000 ) < decodedToken.exp )
-//                 console.log( "De gebruiker is NOG STEEDS ingelogd 🔓" )
-//
-//             void fetchData(storedToken, decodedToken.sub)
-//             console.log(decodedToken)
-//         }
-//         else {
-//             console.log( "De gebruiker is UITGELOGD 🔒" )
-//             localStorage.removeItem("token")
-//             toggleIsAuth({
-//                 isAuth: false,
-//                 user: null,
-//                 status: "done",
-//             })
-//         }
-//
-//
-//     }, [])
-//
-//     function signIn(jwt) {
-//         toggleIsAuth({isAuth: true});
-//         localStorage.setItem("token", jwt)
-//         const deCodeToken = jwtDecode(jwt)
-//         // navigate("/search")
-//         console.log(deCodeToken)
-//         console.log(jwt)
-//         console.log("gebruiker is ingelogd")
-//
-//         void fetchData(jwt, deCodeToken.sub)
-//     }
-//     // ${id}
-//     async function fetchData(token) {
-//         try {
-//             const response = await axios.get(`https://frontend-educational-backend.herokuapp.com/api/user`, {
-//                 headers: {
-//                     "Content-Type": "application/json",
-//                     Authorization: `Bearer ${token}`,
-//                 }
-//             })
-//             console.log(response)
-//
-//             toggleIsAuth({
-//                 ...isAuth,
-//                 isAuth: true,
-//                 user: {
-//                     username: response.data.username,
-//                     email: response.data.email ,
-//                     id: response.data.id,
-//                     // roles:data.roles[0].name
-//                 },
-//                 status: "done"
-//             });
-//
-//
-//         } catch (e) {
-//             console.error(e)
-//         }
-//
-//     }
-//
-//
-//     function signOut() {
-//         localStorage.removeItem("token")
-//         toggleIsAuth({
-//             isAuth: false,
-//             user: null,
-//             status: "done"
-//         });
-//
-//         console.log("De gebruiker is uitgelogd")
-//         navigate("/")
-//     }
-//
-//     const data = {
-//         isAuth: isAuth.isAuth,
-//         user: isAuth.user,
-//         login: signIn,
-//         logout: signOut,
-//
-//     }
-//
-//     return (
-//         <AuthContext.Provider value={data}>
-//             {/*{isAuth.status === "done" ? children : <p>Loading...</p> }*/}
-//             {children}
-//         </AuthContext.Provider>
-//
-//
-//     );
-// }
-//
-// export default AuthContextProvider;

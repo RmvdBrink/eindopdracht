@@ -12,7 +12,7 @@ import SignUp from "./pages/sign-up/SignUp";
 import WorkTogether from "./pages/work-together/WorkTogether";
 import NotFound from "./pages/not-found/NotFound";
 import SearchCard from "./components/search-card/SearchCard";
-import CalculatorCard from "./components/calculator-card/CalculatorCard";
+
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
 import RecipeCard from "./components/Recipe-card/RecipeCard";
@@ -32,7 +32,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Home/>}/>
           <Route path="/kcal-calculator" element={<Calculator/>}/>
-          <Route path="/kcal-calculator/card/id" element={<CalculatorCard/>}/>
           <Route path="/contact" element={<Contact/>}/>
           <Route path="/disclaimer" element={<Disclaimer/>}/>
           <Route path="/f-a-q" element={<Faq/>}/>

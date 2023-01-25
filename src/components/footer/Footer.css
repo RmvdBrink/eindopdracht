@@ -1,3 +1,4 @@
+/*footer styles */
 .footer {
     background-color: var(--primary);
 }
@@ -17,6 +18,7 @@
     text-align: center;
 
 }
+
 nav a:hover {
     color: var(--secondary-a);
 }

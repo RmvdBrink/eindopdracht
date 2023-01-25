@@ -1,8 +1,10 @@
+/*global styles for input component  */
 form a {
     text-decoration: none;
     font-size: 15px;
     color: var(--primary);
 }
+
 form a:hover {
     color: var(--secondary-dark);
     text-decoration-line: underline;
@@ -20,14 +22,15 @@ form input {
     padding: 8px 8px;
     margin: 6px 0;
     border-radius: 25px;
-    border: solid 1px var(--primary) ;
+    border: solid 1px var(--primary);
 }
 
 form p {
     font-size: 14px;
-    padding:  10px 0  10px 0;
+    padding: 10px 0 10px 0;
     text-align: center;
 }
+
 .button-field {
     display: flex;
     flex-direction: column;

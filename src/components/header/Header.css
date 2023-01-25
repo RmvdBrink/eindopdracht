@@ -1,24 +1,34 @@
-
-.header a {
-
-}
-header a:hover,
-nav a:hover {
-    /*color: var(--secondary);*/
-    text-decoration-line: underline;
-
-}
-
-
-
+/*sign in link style*/
 header li {
     list-style: none;
-
-
 }
 
+.inner-content-containers-header {
+    flex-basis: 1400px;
+    flex-shrink: 1;
+    flex-grow: 0;
+    flex-wrap: wrap;
+    margin: 0 20px;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+    padding: 15px 0;
+    gap: 110px;
+}
+
+.inner-content-containers-nav {
+    flex-basis: 1400px;
+    flex-shrink: 1;
+    flex-grow: 0;
+    margin: 0 20px;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    padding: 35px 0;
+}
+
+/*link page styles */
 .nav-container {
-    border: black solid 2px;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -30,7 +40,6 @@ header li {
     text-decoration-line: none;
     z-index: 1;
 
-/*    basis was hier 1200 780 proberen voor laptop */
 }
 
 .nav-container li > a {
@@ -39,22 +48,30 @@ header li {
     flex-direction: row;
     justify-content: flex-end;
     color: var(--primary);
-    font-size: 22px;
-    text-decoration-line: none;
+    font-size: 25px;
+    text-decoration: underline var(--button-color-2);
     z-index: 1;
 }
 
+header a:hover,
+nav a:hover {
+    text-decoration-line: underline;
+    text-decoration: underline var(--primary);
+
+}
 
 
 .ulh li > a {
-    margin: 0 40px 0 150px;
+    margin: 0 40px 0 145px;
     color: var(--primary);
-    font-size: 22px;
+    font-size: 26px;
     list-style: none;
     text-decoration-line: none;
 }
+
 .ulh li > a:hover {
     color: var(--secondary-a);
+    text-decoration: underline var(--primary);
 
 }
 
@@ -67,7 +84,8 @@ header li {
     margin: 0 40px 0 120px;
     cursor: pointer;
     float: right;
- }
+}
+
 .button-logout:hover {
     background-color: var(--button-color);
     color: var(--black);
@@ -80,9 +98,10 @@ header li {
     flex-basis: 10vw;
     height: 30px;
 }
+
 .logout-box span {
     text-align: right;
-    margin: 5px 45px 0 0 ;
+    margin: 5px 45px 0 0;
     color: var(--primary);
     font-size: 16px;
     text-decoration: underline var(--button-color-2);

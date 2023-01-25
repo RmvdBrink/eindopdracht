@@ -1,24 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import Loader from '../loader-compenent/LoaderComponent';
+import React, {useState} from 'react';
 import Button from "../button/Button";
 import "./SearcheContainerComponent.css"
 
-const SearchContainer = ({ searchForRecipes, hideLoader }) => {
+const SearchContainer = ({searchForRecipes}) => {
     const [input, setInput] = useState('');
-    const [showLoader, setShowLoader] = useState(false);
 
+    // when a search button is clicked. The function first checks if the input variable is an empty string
+    //variable is not an empty string, it calls the searchForRecipes function and passes in the input
     const handleSearchButton = () => {
-        if(input === '') return
+        if (input === '') return
 
         searchForRecipes(input);
+        //This clears the input field after the search is performed.
         setInput('');
-        setShowLoader(true);
+
     }
 
-    // hides loader when recipes are found
-    useEffect(() => {
-        setShowLoader(false);
-    }, [hideLoader])
 
     return (
         <section>
@@ -26,21 +23,20 @@ const SearchContainer = ({ searchForRecipes, hideLoader }) => {
 
             <div className="form-item">
                 <input className="search-bar"
-                    type="text"
-                    placeholder="Search for a recipe"
-                    value={input}
-                    onChange={e => setInput(e.target.value)}
+                       type="text"
+                       placeholder="Search for a recipe"
+                       value={input}
+                       onChange={e => setInput(e.target.value)}
                 />
 
-                   <Button
-                       name="search-button "
-                       type="submit"
-                       children="Search"
-                       clickHandler={handleSearchButton}/>
+                <Button
+                    name="search-button "
+                    type="submit"
+                    children="Search"
+                    clickHandler={handleSearchButton}/>
             </div>
 
-            {showLoader ? <Loader /> : null}
-            <div className="overlay"></div>
+
         </section>
     )
 }

@@ -67,10 +67,15 @@ function Calculator() {
             <main className="outer-content-container-calculator">
                 <section className="inner-content-container-calculator">
                     <div className="content-container-calculator1">
-                        <h5>Kcal calculator page</h5>
-                        <p>Our dishes always consist very healthy products.
-                            Do you still want to know how many kcal you take to balance your eating habits, enter them
-                            below.</p>
+                        <h2>Kcal calculator page</h2>
+                        <p>Welcome to our Kcal Calculator! With this tool, you can easily calculate the nutritional value of your favorite recipes. Here's how it works: </p>
+                        <ul>
+                            <li>First, enter the title of a recipe that you found on our site in the "Title" field.</li>
+                            <li>Next, copy and paste the ingredients list from the recipe into the "Ingredients" text field, with each ingredient on a new line : </li>
+                            <li>(e.g. "1/2 cup coconut milk").</li>
+                            <li>Finally, simply press the "Calculate" button to see the nutritional values, including the total calories, of the recipe.</li>
+                        </ul>
+                        <p> Our tool is easy to use and will help you make informed choices about the food you eat. Give it a try and discover the nutritional value of your favorite recipes!</p>
                     </div>
                     <form onSubmit={handleSubmit}>
                         <div className="content-container-calculator2">
@@ -101,12 +106,12 @@ function Calculator() {
                             <div className="content-container-calculator3">
 
 
-                                <Button name="calculator"
+                                <Button name="button-calculator"
                                         type="submit"
                                         children="calculate"
                                 />
                                 <Button
-                                    name="reset"
+                                    name="button-reset"
                                     type="reset"
                                     children="Reset"
                                     clickHandler={handleReset}/>

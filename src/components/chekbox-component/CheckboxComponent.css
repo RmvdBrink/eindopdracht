@@ -1,4 +1,4 @@
-.checkbox-search2-box{
+.checkbox-search2-box {
     display: flex;
     flex-direction: row-reverse;
     justify-content: center;
@@ -8,13 +8,13 @@
 
 }
 
-.checkbox-search2-box label{
+.checkbox-search2-box label {
     padding: 6px 6px 6px 30px;
     width: 100vw;
 
 }
 
-.checkbox-search2-box input{
+.checkbox-search2-box input {
     display: flex;
     align-items: center;
     padding: 2em 4em;

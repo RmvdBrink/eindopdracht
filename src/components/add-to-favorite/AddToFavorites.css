@@ -1,6 +1,7 @@
+/*style for add to favorite/ remove from favorite */
 .add-to-favorite-container {
     display: flex;
-    flex-direction:revert;
+    flex-direction: revert;
     justify-content: center;
     align-items: center;
     color: var(--button-color);
