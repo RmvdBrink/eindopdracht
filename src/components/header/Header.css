@@ -81,7 +81,7 @@ nav a:hover {
     background-color: var(--button-color-2);
     color: var(--white);
     border-radius: 110px 40px 110px 40px;
-    margin: 0 40px 0 120px;
+    margin: 0 40px 10px 120px;
     cursor: pointer;
     float: right;
 }

@@ -25,10 +25,9 @@ body {
 }
 
 
-
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Hepta Slab', serif;
-    color: var(--primary) ;
+    color: var(--primary);
 
 }
 
@@ -45,10 +44,12 @@ h2 {
 h3 {
     font-size: 34px;
 }
+
 h4 {
     font-size: 28px;
 
 }
+
 h5 {
     font-size: 24px;
     color: var(--black);
@@ -59,6 +60,7 @@ h6 {
     font-size: 16px;
     color: var(--secondary-a);
 }
+
 /* ------------------------------- 3. Layout --------------------------------------- */
 /* --------------- 3.1 Reusables ----------------------- */
 /*root colors voor the app*/
@@ -72,7 +74,7 @@ h6 {
     --background-color: #fbf9f9bf;
     --primary-light-green: #f0fded;
     --button-color: #b5f782;
-    --button-color-2:#4CAF50;
+    --button-color-2: #4CAF50;
     --black: #292929;
     --white: #ffffff;
     --error: #f62b11;
@@ -80,22 +82,24 @@ h6 {
 
 
 }
+
 /* --------------- 3.2 Other --------------------------- */
 .logo {
     width: 220px;
     position: absolute;
     top: 0;
-    left:0;
+    left: 0;
     z-index: 0;
 }
 
 form label {
-    font-family: 'Roboto Condensed', sans-serif ;
+    font-family: 'Roboto Condensed', sans-serif;
 }
 
 .errors {
-    color:var(--error) ;
+    color: var(--error);
 }
+
 /* ------------------------------- 4. Areas ---------------------------------------- */
 
 .outer-content-container {

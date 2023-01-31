@@ -1,14 +1,11 @@
+/* global styles sign in page */
 .outer-content-container-sign-in {
-
     background: url("../../assets/background-signin.jpg") no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
 }
-
-
-
 
 .outer-content-container-sign-in {
     display: flex;
@@ -17,7 +14,7 @@
     flex-grow: 1;
     flex-basis: 1200px;
     flex-wrap: wrap;
-    border: #de9bf1 solid 3px;
+
 }
 
 .inner-content-container-sign-in {
@@ -25,7 +22,6 @@
     flex-direction: column;
     justify-content: center;
     flex-basis: 1400px;
-    border: blue solid 3px;
     flex-wrap: wrap;
     width: 100vw;
     height: 100vh;
@@ -39,15 +35,14 @@
     justify-content: center;
     align-items: center;
     flex-basis: 200px;
-    border: #f61045 solid 3px;
+
 
 }
-/*Algemene formulier-styling*/
+
+/*General form-styling*/
 .sign-in-form {
     display: flex;
     flex-direction: column;
-    /*text-align: center;*/
-    background-color:var(--secondary-light);
     padding: 32px;
     max-width: 430px;
     min-height: 300px;
@@ -56,6 +51,7 @@
     box-shadow: .25rem .5rem 1rem 0 rgba(0, 0, 0, 0.1);
     background-color: var(--background-color);
 }
+
 .button-field {
     display: flex;
     flex-direction: column;

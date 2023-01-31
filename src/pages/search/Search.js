@@ -29,17 +29,20 @@ function Search() {
     const [minCalories, setMinCalories] = useState("");
     const [maxCalories, setMaxCalories] = useState("");
     const [showNotificationTab, setShowNotificationTab] = useState(false);
-    const [hideLoader, setHideLoader] = useState(false);
     const [showFilter, setShowFilter] = useState(false);
 
 
     const { recipes, setRecipes } = useContext(RecipesContext);
     const { isAuth } = useContext(AuthContext);
 
-
+    //convert an array of selected allergens and diets into a string that can be used in a URL query.
+    //oin(). In this case, "&" is used as the separator. The resulting string is then assigned to the variables
+    // allergenToExclude and dietsToExclude
     const allergenToExclude = selectedAllergen.join("&");
     const dietsToExclude = selectedDiet.join("&");
-    //function that requests min and max kcal for recpten filter
+
+
+    //function that requests min and max kcal for recipe filter
     const calorieRange = ("calories=")
     const combineMinMaxCalorie = minCalories.toString().concat('-',  maxCalories.toString());
     let totalCalorieRange = calorieRange.concat(combineMinMaxCalorie)
@@ -47,12 +50,15 @@ function Search() {
     if (totalCalorieRange === "calories=-") {
         totalCalorieRange= "";
     }
+    //function that shows the filter options by clicking the button
     const toggleFilter = () => {
         setShowFilter(!showFilter);
     };
 
 
-
+    //function that retrieves recipes with api call, take into account multiple parameters to perform specific filtering commands
+    //it also does the data formatting to a
+    //   recipe object containing only the data I need to display on the screen and save for favorites
     const searchForRecipes = async (query) => {
         if (query === "") return;
 
@@ -85,7 +91,9 @@ function Search() {
 
 
 
-
+    //that takes an array of "recipes" as an argument, and returns an array of objects that contain specific properties
+    //of the recipes. The map() method is used to iterate through the array of recipes, and for each recipe, a new
+    // object is created with properties
 
     const getRequiredRecipesData = (recipes) => {
         return recipes.map((recipe) => {
@@ -108,6 +116,8 @@ function Search() {
         });
     }
 
+    // function getSearch that takes an event object e as an argument. The function is used to handle a form submission
+    // or a button click event. The first line e.preventDefault() prevents the default behavior of the event, which is to refresh the page when the form is submitted or the button is clicked.
 
     const getSearch = e => {
         e.preventDefault();
@@ -115,26 +125,26 @@ function Search() {
         setMinCalories("")
 
     }
-    // Voeg een functie toe die wordt uitgevoerd wanneer een allergeen wordt geselecteerd of deselecteerd
+    // Add a function that will run when an allergen is selected or deselected
     const handleAllergenChange = (allergen) => {
-        // Controleer of het allergeen al in de lijst met geselecteerde allergenen staat
+        // Check if the allergen is already in the list of selected allergens
         if (selectedAllergen.includes(allergen)) {
-            // Verwijder het allergeen uit de lijst
+            // Remove the allergen from the list
             setSelectedAllergen(selectedAllergen.filter((a) => a !== allergen));
         } else {
-            // Voeg het allergeen toe aan de lijst
+            // Add the allergen to the list
             setSelectedAllergen([...selectedAllergen, allergen]);
         }
     }
 
-    // Voeg een functie toe die wordt uitgevoerd wanneer een diets wordt geselecteerd of deselecteerd
+    // Add a function that will be executed when a diet is selected or deselected
     const handleDietsChange = (diets) => {
-        // Controleer of het diets al in de lijst met geselecteerde diets staat
+        // Check if the diet is already in the list of selected diets
         if (selectedDiet.includes(diets)) {
-            // Verwijder het diets uit de lijst
+            // Remove the diet from the list
             setSelectedDiet(selectedDiet.filter((a) => a !== diets));
         } else {
-            // Voeg het diets toe aan de lijst
+            // Add the diet to the list
             setSelectedDiet([...selectedDiet, diets]);
         }
     }
@@ -203,7 +213,7 @@ function Search() {
                         </div>
                         <label className="search-label" htmlFor="allergens" style={{ display: showFilter ? "flex" : "none" }}>Allergies :</label>
                         <div className="checkbox-content-container-search2" style={{ display: showFilter ? "flex" : "none" }}>
-                        {/* Maak het radiobox-menu voor allergenen */}
+                        {/* Make the radiobox-menu for allergenen */}
 
                             <span className="cel1" style={{ display: showFilter ? "flex" : "none" }}>
 
@@ -565,7 +575,7 @@ function Search() {
                                 />
                         </span>
                         </div>
-                        {/*{console.log(dietsToExclude)}*/}
+
                         </div>
                     </form>
 

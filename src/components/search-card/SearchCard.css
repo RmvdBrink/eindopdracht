@@ -33,7 +33,6 @@
     flex-shrink: 1;
     flex-wrap: wrap;
     flex-basis: 501px;
-    border: gold solid 3px;
     text-align: center;
     cursor: default;
 }

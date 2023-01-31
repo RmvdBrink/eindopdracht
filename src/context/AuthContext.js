@@ -53,7 +53,7 @@ function AuthContextProvider( { children } ) {
         navigate( '/' );
     }
 
-    // Omdat we deze functie in login- en het mounting-effect gebruiken, staat hij hier gedeclareerd!
+
     //function calls toggleIsAuth and passed an object with isAuth:false, user:null and status:'done'
     //navigate function to navigate to the root route '/'homepage
     async function fetchData(token) {
@@ -66,7 +66,7 @@ function AuthContextProvider( { children } ) {
             })
             console.log(result.data);
 
-            // zet de gegevens in de state
+            // put the data in the state
             toggleIsAuth( {
                 ...isAuth,
                 isAuth: true,

@@ -1,3 +1,4 @@
+/*global styles sign up page */
 .outer-content-container-sign-up {
 
     background: url("../../assets/background-sign-up-6546181 (1).jpg") no-repeat center center fixed;
@@ -8,8 +9,6 @@
 }
 
 
-
-
 .outer-content-container-sign-up {
     display: flex;
     flex-direction: row;
@@ -17,7 +16,6 @@
     flex-grow: 1;
     flex-basis: 1200px;
     flex-wrap: wrap;
-    border: #de9bf1 solid 3px;
 }
 
 .inner-content-container-sign-up {
@@ -25,7 +23,6 @@
     flex-direction: column;
     justify-content: center;
     flex-basis: 1400px;
-    border: blue solid 3px;
     flex-wrap: wrap;
     width: 100vw;
     height: 100vh;
@@ -39,15 +36,13 @@
     justify-content: center;
     align-items: center;
     flex-basis: 200px;
-    border: #f61045 solid 3px;
 
 }
-/*Algemene formulier-styling*/
+
+/*general formulier-styling*/
 .sign-up-form {
     display: flex;
     flex-direction: column;
-    /*text-align: center;*/
-    background-color:var(--secondary-light);
     padding: 32px;
     max-width: 430px;
     min-height: 300px;
