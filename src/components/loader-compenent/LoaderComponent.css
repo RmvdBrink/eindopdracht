@@ -1,3 +1,4 @@
+/*global styles loader loader of three staggered circles*/
 .loader {
     display: flex;
     justify-content: center;
@@ -9,7 +10,7 @@
     height: 8px;
     border-radius: 50%;
     margin: 0 8px;
-    border: 1px solid var(--secondary-dark);
+    border: 1px solid var(--button-color-2);
     animation: circle-animation 1s ease-in-out infinite;
 }
 

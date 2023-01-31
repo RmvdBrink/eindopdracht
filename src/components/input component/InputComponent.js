@@ -1,7 +1,7 @@
 import React from 'react';
 import "./InputComponent.css"
-
-function InputComponent({inputId,children, inputName, value, changeHandler, inputType, validationRules,inputPlaceholder, register, errors,  }) {
+// input component reusable across all sites uses react form hook
+function InputComponent({inputId,children, inputName, value, changeHandler, inputType, validationRules,inputPlaceholder, register, errors,}) {
     return (
         <>
             <label htmlFor={`${inputId}-field`}>

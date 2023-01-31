@@ -1,6 +1,8 @@
 import React from 'react';
 import "./Button.css"
-function Button({type, name, children, clickHandler,  }) {
+
+//component created for general button
+function Button({type, name, children, clickHandler,}) {
     return (
         <>
             <button

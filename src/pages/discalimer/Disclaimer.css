@@ -10,13 +10,14 @@
     flex-grow: 1;
     flex-basis: 1400px;
     flex-wrap: wrap;
-    border: #de9bf1 solid 3px;
     font-weight: 500;
+    border-radius: 10px;
 
 }
 .outer-content-container-disclaimer h5 {
     font-size: 20px;
     padding: 20px 0;
+
 
 }
 
@@ -29,6 +30,7 @@
     border:  solid 1px var(--primary);
     border-radius: 10px;
     flex-wrap: wrap;
+    margin: 30px 0;
     background-color: var(--background-color);
 }
 
@@ -38,11 +40,10 @@
     justify-content: flex-start;
     align-items: center;
     flex-basis: 300px;
-    /*width: 506px;*/
     flex-wrap: wrap;
-    /*border: #f61045 solid 3px;*/
     text-align: center;
     padding: 40px 0;
+    border-radius: 10px;
     background-color: var(--background-color);
 }
 .content-container-disclaimer1 p {
@@ -77,9 +78,7 @@
     justify-content: center;
     align-items: center;
     flex-basis: 300px;
-    /*width: 506px;*/
     flex-wrap: wrap;
-    /*border: #74ff24 solid 3px;*/
     text-align: center;
     background-color: var(--background-color);
 
@@ -94,9 +93,7 @@
     justify-content: center;
     align-items: center;
     flex-basis: 300px;
-    /*width: 506px;*/
     flex-wrap: wrap;
-    /*border: #74ff24 solid 3px;*/
     text-align: center;
     background-color: var(--background-color);
 
@@ -108,5 +105,7 @@
 
 .content-container-disclaimer4 li {
     list-style: none;
+    padding: 4px 0;
+
 
 }

@@ -10,31 +10,34 @@
     flex-grow: 1;
     flex-basis: 1400px;
     flex-wrap: wrap;
-    border: #de9bf1 solid 3px;
     font-weight: 500;
 
 }
+
 .outer-content-container-faq a {
     font-size: 17px;
+    color: var(--primary);
 }
+
 .outer-content-container-work h5 {
     font-size: 20px;
     padding: 20px 0;
 
 }
-.inner-content-container-title-faq {
 
-}
 .inner-content-container-faq {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     flex-basis: 700px;
-    border:  solid 1px var(--primary);
+    border: solid 1px var(--primary);
     border-radius: 10px;
     flex-wrap: wrap;
+    margin: 30px 0;
+    border-radius: 10px;
     background-color: var(--background-color);
+    box-shadow: .25rem .5rem 1rem 0 rgba(0, 0, 0, 0.3);
 }
 
 .content-container-faq1 {
@@ -45,24 +48,27 @@
     flex-basis: 300px;
     /*width: 600px;*/
     flex-wrap: wrap;
-    /*border: #f61045 solid 3px;*/
     text-align: center;
     padding: 40px 0;
+    border-radius: 10px;
     background-color: var(--background-color);
 }
 
 .content-container-faq1 h3 {
-    padding:0 0 80px 0;
+    padding: 0 0 80px 0;
     color: var(--secondary-dark);
 }
-.content-container-faq1  h4, h5{
-    padding:0 0 15px 0;
+
+.content-container-faq1 h4, h5 {
+    padding: 0 0 15px 0;
 
 }
+
 .content-container-faq1 p {
     padding: 20px 0;
     margin: 5px 0;
 }
+
 .content-container-faq2 {
     display: flex;
     flex-direction: column;
@@ -71,34 +77,36 @@
     flex-basis: 300px;
     /*width: 600px;*/
     flex-wrap: wrap;
-    /*border: #74ff24 solid 3px;*/
     text-align: center;
     background-color: var(--background-color);
     padding: 40px 0;
 }
-.content-container-faq2  h4, h5 {
+
+.content-container-faq2 h4, h5 {
     padding: 0 0 15px 0;
 }
+
 .content-container-faq2 p {
     padding: 20px 0;
     margin: 5px 0;
 }
+
 .content-container-faq3 {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     flex-basis: 300px;
-    /*width: 600px;*/
     flex-wrap: wrap;
-    /*border: #74ff24 solid 3px;*/
     text-align: center;
     background-color: var(--background-color);
     padding: 40px 0;
 }
-.content-container-faq3  h4, h5 {
+
+.content-container-faq3 h4, h5 {
     padding: 0 0 15px 0;
 }
+
 .content-container-faq3 p {
     padding: 20px 0;
     margin: 5px 0;

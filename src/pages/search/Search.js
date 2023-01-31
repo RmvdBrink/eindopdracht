@@ -1,18 +1,18 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useState} from 'react';
 import "./Search.css"
 import axios from "axios";
 import SearchCard from "../../components/search-card/SearchCard";
 import Button from "../../components/button/Button";
 import CheckboxComponent from "../../components/chekbox-component/CheckboxComponent";
 import DietsCheckboxComponent from "../../components/chekbox-component/diets-components/DietsCheckboxComponent";
-import InputComponent from "../../components/input component/InputComponent";
 import {RecipesContext} from "../../context/RecipesContext";
 import SearchContainer from "../../components/serche-container-component/SearcheContainerComponent";
 import NotificationTab from "../../components/notification-tab/NotificationTab";
+import Loader from "../../components/loader-compenent/LoaderComponent"
 import {AuthContext} from "../../context/AuthContext";
 import {Link} from "react-router-dom";
 
-// import { useForm} from "react-hook-form";
+
 
 
 
@@ -21,7 +21,7 @@ const APP_KEY = "13cd3b413ae7c5546cc09ef8a8590c71"
 
 function Search() {
 
-    const [search, setSearch] = useState("")
+
     const [error, toggleError ] = useState(false);
     const [loading, toggleLoading] = useState(false);
     const [selectedAllergen, setSelectedAllergen] = useState([]);
@@ -29,19 +29,20 @@ function Search() {
     const [minCalories, setMinCalories] = useState("");
     const [maxCalories, setMaxCalories] = useState("");
     const [showNotificationTab, setShowNotificationTab] = useState(false);
-    const [hideLoader, setHideLoader] = useState(false);
     const [showFilter, setShowFilter] = useState(false);
 
 
     const { recipes, setRecipes } = useContext(RecipesContext);
     const { isAuth } = useContext(AuthContext);
 
-    // const allergenToExclude = selectedAllergen.map(allergen => allergen.toString()).join(",");
-    // const dietsToExclude = selectedDiet.map(diet => diet.toString()).join(",");
-
+    //convert an array of selected allergens and diets into a string that can be used in a URL query.
+    //oin(). In this case, "&" is used as the separator. The resulting string is then assigned to the variables
+    // allergenToExclude and dietsToExclude
     const allergenToExclude = selectedAllergen.join("&");
     const dietsToExclude = selectedDiet.join("&");
-    //function that requests min and max kcal for recpten filter
+
+
+    //function that requests min and max kcal for recipe filter
     const calorieRange = ("calories=")
     const combineMinMaxCalorie = minCalories.toString().concat('-',  maxCalories.toString());
     let totalCalorieRange = calorieRange.concat(combineMinMaxCalorie)
@@ -49,46 +50,21 @@ function Search() {
     if (totalCalorieRange === "calories=-") {
         totalCalorieRange= "";
     }
+    //function that shows the filter options by clicking the button
     const toggleFilter = () => {
         setShowFilter(!showFilter);
     };
-    // const searchForRecipes = async (query) => {
-    //     if (query === "") return;
-    //
-    //     // resetting hide loader
-    //     setHideLoader(false);
-    //     toggleLoading(true)
-    //
-    //     const requestURL = getRecipesSearchRequestRL(query);
-    //     const searchRecipes = await fetch(requestURL);
-    //     const returnedRecipes = await searchRecipes.json();
-    //     toggleError(true)
-    //
-    //     if (returnedRecipes.to === 0) {
-    //         setShowNotificationTab(true);
-    //
-    //     } else {
-    //         const recipes = getRequiredRecipesData(returnedRecipes.hits);
-    //         setRecipes(recipes);
-    //         toggleError(false);
-    //     }
-    //     // used in SearchContainer and HealthyFoods components to hide loader when recipes are found
-    //     setHideLoader(true);
-    //     toggleLoading(false);
-    // }
-    // Returns URL used to fetch recipes from edamam recipe search api
-// using the required environment variables id and key which are stored in .env file
-//     const getRecipesSearchRequestRL = (query) => {
-//         return `https://api.edamam.com/api/recipes/v2?type=public&q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}&${dietsToExclude}&${allergenToExclude}&${totalCalorieRange}`
-//     }
 
 
+    //function that retrieves recipes with api call, take into account multiple parameters to perform specific filtering commands
+    //it also does the data formatting to a
+    //   recipe object containing only the data I need to display on the screen and save for favorites
     const searchForRecipes = async (query) => {
         if (query === "") return;
 
-        // resetting hide loader
-        setHideLoader(true);
-        // toggleLoading(true)
+
+
+        toggleLoading(true);
 
         try {
             toggleError(false);
@@ -96,17 +72,28 @@ function Search() {
             const recipes = getRequiredRecipesData(response.data.hits);
             setRecipes(recipes);
             toggleError(false);
+            if (response.data.hits.length === 0) {
+                setShowNotificationTab(true);
+            } else {
+                setShowNotificationTab(false);
+            }
+
+
         } catch (e) {
-            toggleError(true)
+            toggleError(true);
         }
-        // used in SearchContainer and HealthyFoods components to hide loader when recipes are found
-        setHideLoader(false);
-        // toggleLoading(false);
+
+
+        toggleLoading(false);
+
+
     }
-    console.log(hideLoader)
 
 
 
+    //that takes an array of "recipes" as an argument, and returns an array of objects that contain specific properties
+    //of the recipes. The map() method is used to iterate through the array of recipes, and for each recipe, a new
+    // object is created with properties
 
     const getRequiredRecipesData = (recipes) => {
         return recipes.map((recipe) => {
@@ -128,67 +115,36 @@ function Search() {
             }
         });
     }
-    // useEffect(() => {
-    //     const controller = new AbortController();
-    //
-    //     async function fetchData() {
-    //         toggleLoading(true);
-    //
-    //         try {
-    //             toggleError(false);
-    //             const data = await axios.get(`https://api.edamam.com/api/recipes/v2?type=public&q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}&${dietsToExclude}&${allergenToExclude}&${totalCalorieRange}`,{signal: controller.signal})
-    //             console.log(data.data.hits)
-    //             setRecipes(data.data.hits)
-    //
-    //
-    //         } catch (e) {
-    //
-    //             if (axios.isCancel(e)) {
-    //                 console.log("The axios request was cancelled")
-    //             }  else {
-    //                 console.error(e)
-    //                 toggleError(true)
-    //             }
-    //         }
-    //         toggleLoading(false)
-    //     }
-    //     void fetchData()
-    //
-    //     return function cleanup() {
-    //         controller.abort();
-    //     }
-    // }, [query]);
 
-
+    // function getSearch that takes an event object e as an argument. The function is used to handle a form submission
+    // or a button click event. The first line e.preventDefault() prevents the default behavior of the event, which is to refresh the page when the form is submitted or the button is clicked.
 
     const getSearch = e => {
         e.preventDefault();
-        // searchForRecipes()
-        setSearch("");
         setMaxCalories("")
         setMinCalories("")
 
     }
-    // Voeg een functie toe die wordt uitgevoerd wanneer een allergeen wordt geselecteerd of deselecteerd
+    // Add a function that will run when an allergen is selected or deselected
     const handleAllergenChange = (allergen) => {
-        // Controleer of het allergeen al in de lijst met geselecteerde allergenen staat
+        // Check if the allergen is already in the list of selected allergens
         if (selectedAllergen.includes(allergen)) {
-            // Verwijder het allergeen uit de lijst
+            // Remove the allergen from the list
             setSelectedAllergen(selectedAllergen.filter((a) => a !== allergen));
         } else {
-            // Voeg het allergeen toe aan de lijst
+            // Add the allergen to the list
             setSelectedAllergen([...selectedAllergen, allergen]);
         }
     }
 
-    // Voeg een functie toe die wordt uitgevoerd wanneer een diets wordt geselecteerd of deselecteerd
+    // Add a function that will be executed when a diet is selected or deselected
     const handleDietsChange = (diets) => {
-        // Controleer of het diets al in de lijst met geselecteerde diets staat
+        // Check if the diet is already in the list of selected diets
         if (selectedDiet.includes(diets)) {
-            // Verwijder het diets uit de lijst
+            // Remove the diet from the list
             setSelectedDiet(selectedDiet.filter((a) => a !== diets));
         } else {
-            // Voeg het diets toe aan de lijst
+            // Add the diet to the list
             setSelectedDiet([...selectedDiet, diets]);
         }
     }
@@ -205,18 +161,20 @@ function Search() {
                 <p> Find healthy recipes that contributes to your daily life!</p>
                 <p>Welcome to the Recipes Search page, where you can find healthy recipes that contribute to your daily life! As a user, you can always search for recipes using a keyword, but to make use of the full functionality of the page, you will need to log in. </p>
                     <p> Once logged in, you will have access to search filters for dietary restrictions and allergies, and the ability to save your favorite recipes for easy access later. Enjoy!</p>
-                {showNotificationTab ? <NotificationTab text="No recipes found for your search" setShowNotificationTab={setShowNotificationTab} /> : null}
-                </div>
+            </div>
             </div>
             <div className="content-container-search1-title-text">
 
             </div>
             {error && <p>Something went wrong while retrieving the data</p>}
-            {loading && <p>we are loading the data for you</p>}
-                <div className="content-container-search2">
-                    <form onSubmit={getSearch} >
-                    <SearchContainer searchForRecipes={searchForRecipes} hideLoader={hideLoader}/>
 
+                <div className="content-container-search2">
+
+                    <form onSubmit={getSearch} >
+                        <div className="search-bar-content-container-search2">
+                        {showNotificationTab ? <NotificationTab text="No recipes found for your search" setShowNotificationTab={setShowNotificationTab} /> : null}
+                        <SearchContainer searchForRecipes={searchForRecipes} />
+                            {loading ? <Loader /> : null}
                         <div>
                             {isAuth ?
                                 <div className="content-container-search2-button">
@@ -250,21 +208,15 @@ function Search() {
                                     value={maxCalories}
                                     onChange={(e) => setMaxCalories(e.target.value)}
                                 />
-                                {console.log(minCalories)}
-                                {console.log(maxCalories)}
-                                {console.log(totalCalorieRange)}
+
                             </div>
                         </div>
                         <label className="search-label" htmlFor="allergens" style={{ display: showFilter ? "flex" : "none" }}>Allergies :</label>
                         <div className="checkbox-content-container-search2" style={{ display: showFilter ? "flex" : "none" }}>
-                        {/* Maak het radiobox-menu voor allergenen */}
+                        {/* Make the radiobox-menu for allergenen */}
 
                             <span className="cel1" style={{ display: showFilter ? "flex" : "none" }}>
 
-
-
-                                {console.log(selectedDiet)}
-                                {console.log(selectedAllergen)}
                             <CheckboxComponent
                             label="gluten"
                             type="checkbox"
@@ -409,7 +361,7 @@ function Search() {
 
                         </span>
                         </div>
-                        {/*{console.log(allergenToExclude)}*/}
+
 
                         {/* Maak het radiobox-menu voor diets */}
                         <label className="search-label" htmlFor="diets" style={{ display: showFilter ? "flex" : "none" }}>Diets :</label>
@@ -623,28 +575,16 @@ function Search() {
                                 />
                         </span>
                         </div>
-                        {/*{console.log(dietsToExclude)}*/}
 
+                        </div>
                     </form>
 
                 </div>
             {recipes.length > 0 ? <div className="content-container-search3">
 
             {recipes.length > 0 ? <SearchCard recipes={recipes}/> : null}
-            {showNotificationTab ? <NotificationTab text="No recipes found for your search" setShowNotificationTab={setShowNotificationTab} /> : null}
 
 
-                {/*{recipes.map((recipe) => {*/}
-                {/*    return( <SearchCard*/}
-                {/*            key={recipe.recipe.uri}*/}
-                {/*            title={recipe.recipe.label}*/}
-                {/*            calories={recipe.recipe.calories}*/}
-                {/*            image={recipe.recipe.image}*/}
-                {/*            id={recipe.recipe.uri.split("_")[1]}*/}
-                {/*        />*/}
-
-                {/*    )*/}
-                {/*})}*/}
             </div> : null}
         </section>
     </main>
@@ -654,27 +594,3 @@ function Search() {
 }
 
 export default Search;
-
-// <div>
-//     <InputComponent
-//         inputId="search"
-//         inputType="text"
-//         inputName="search"
-//         inputPlaceholder="search her for you recipes"
-//         value={search}
-//         changeHandler={updateSearch}
-//         validationRules={{
-//             required: {
-//                 value: true,
-//                 message:"this field is required",
-//             },
-//         }}
-//         register={register}
-//         errors={errors}
-//     />
-//     <Button
-//         name="search-button"
-//         type="submit"
-//         children="Search"
-//     />
-// </div>

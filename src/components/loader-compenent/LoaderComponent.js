@@ -1,5 +1,5 @@
 import "./LoaderComponent.css"
-
+//loader of three staggered circles
 const Loader = () => {
     return (
         <div className="loader">
