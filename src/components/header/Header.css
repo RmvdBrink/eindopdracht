@@ -188,7 +188,7 @@ nav a:hover {
         flex-direction: column;
         gap: 5em;
 
-        background-color: var(--background-color);
+        background-color: var(--background-color-2);
         padding: 3em 2em;
     }
 
