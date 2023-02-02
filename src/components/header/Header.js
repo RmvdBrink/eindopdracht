@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 // import Logo from "./assets/logo-og.png"
 import {NavLink} from "react-router-dom";
 import "./Header.css"
@@ -8,6 +8,12 @@ import Button from "../button/Button";
 
 
 function Header() {
+
+    const [ mobileMenu, toggleMobileMenu ] = useState( true );
+
+    function showMobileMenu() {
+        toggleMobileMenu( prev => !prev )
+    };
 
     //context subscription to context to use it throughout the page
 
@@ -19,6 +25,16 @@ function Header() {
             <header className="outer-content-container">
 
                 <div className="inner-content-containers-header ">
+
+                    <button className="toggle-menu" type="button" onClick={ showMobileMenu }>
+                        {
+                            mobileMenu
+                                ? <span className="material-symbols-outlined">menu</span>
+                                : <span className="material-symbols-outlined">close</span>
+                        }
+
+                    </button>
+
                     <ul className="ulh">
                         {/*isAuth checks if use is authorized to see this item conditional rendering */}
                         {isAuth ?
@@ -46,14 +62,14 @@ function Header() {
             </header>
             <div className="outer-content-container">
                 <nav className="inner-content-containers-nav">
-                    <ul className="nav-container">
-                        <li><NavLink to="/">Home</NavLink></li>
-                        <li><NavLink to="/search">Recipes</NavLink></li>
-                        <li><NavLink to="/kcal-calculator">Calculator</NavLink></li>
-                        <li><NavLink to="/contact">Contact</NavLink></li>
+                    <ul className={ mobileMenu ? "menu" : "mobile-menu" }>
+                        <li><NavLink className={ ( { isActive } ) => isActive ? "link--active" : "link--default" }  to="/">Home</NavLink></li>
+                        <li><NavLink className={ ( { isActive } ) => isActive ? "link--active" : "link--default" } to="/search">Recipes</NavLink></li>
+                        <li><NavLink className={ ( { isActive } ) => isActive ? "link--active" : "link--default" } to="/kcal-calculator">Calculator</NavLink></li>
+                        <li><NavLink className={ ( { isActive } ) => isActive ? "link--active" : "link--default" } to="/contact">Contact</NavLink></li>
                         {/*conditional rendering whether user can see favorites if they are logged in */}
                         {isAuth ?
-                            <li>< NavLink to="/favorite-page">Favorite </NavLink></li>
+                            <li>< NavLink className={ ( { isActive } ) => isActive ? "link--active" : "link--default" } to="/favorite-page">Favorite </NavLink></li>
                             : ""}
                     </ul>
                 </nav>

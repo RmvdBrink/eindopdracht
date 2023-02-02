@@ -1,20 +1,36 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Button from "../../components/button/Button";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import "./Contact.css"
 import "../../App.css"
 import {useForm} from "react-hook-form";
 import InputComponent from "../../components/input component/InputComponent";
-
+import axios from "axios";
 
 function Contact() {
+
+
 
     const {handleSubmit, formState: {errors}, register} = useForm();
 
 
-    function handleFormSubmit(data) {
-        console.log(data)
+    const navigate = useNavigate();
+
+   async function handleFormSubmit(data) {
+      await axios.post(`https://formsubmit.co/66dbde386355063288d8e9e97e8d6e5c`, data)
+            .then(response => {
+                console.log(response);
+                console.log(data)
+                alert('thank you for filling out our contact form we will contact you as soon as possible')
+                navigate("/")
+            })
+            .catch(e => {
+                console.error(e);
+            });
+
+
     }
+
 
     return (
         <>

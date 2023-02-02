@@ -55,7 +55,6 @@ header li {
 
 header a:hover,
 nav a:hover {
-    text-decoration-line: underline;
     text-decoration: underline var(--primary);
 
 }
@@ -105,4 +104,95 @@ nav a:hover {
     color: var(--primary);
     font-size: 16px;
     text-decoration: underline var(--button-color-2);
+}
+
+.sign-in {
+    color: var(--primary);
+}
+.mobile-menu {
+    display: flex;
+    flex-direction: row;
+    gap: 2em;
+    list-style: none;
+}
+.menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-basis: 780px;
+    flex-wrap: wrap;
+    color: var(--primary);
+    font-size: 22px;
+    list-style: none;
+    text-decoration-line: none;
+
+}
+
+
+.link--default {
+    text-decoration: none;
+    color: var(--primary);
+    font-size: 22px;
+    gap: 20px;
+}
+
+.link--active {
+    color: var(--secondary-a);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 5px;
+    gap: 20px;
+    font-size: 26px;
+}
+
+.toggle-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 210px;
+}
+
+
+@media screen and (max-width: 767px) {
+    .menu a {
+        display: none;
+        flex-direction: row;
+        justify-content: space-around;
+        flex-basis: 780px;
+        flex-wrap: wrap;
+        color: var(--primary);
+        font-size: 22px;
+        list-style: none;
+        text-decoration-line: none;
+    }
+
+    .toggle-menu,
+    .mobile-login {
+        display: block;
+        color: var(--primary);
+        background-color: var(--button-color-2);
+        border: none;
+        cursor: pointer;
+        position: absolute;
+        top: 295px;
+        left: 0;
+        border-radius: 0px;
+    }
+
+    .mobile-menu {
+        position: absolute;
+        top: 390px;
+        left: 0;
+
+        display: flex;
+        flex-direction: column;
+        gap: 5em;
+
+        background-color: var(--background-color);
+        padding: 3em 2em;
+    }
+
+    .mobile-menu li {
+        list-style-type: none;
+    }
 }
