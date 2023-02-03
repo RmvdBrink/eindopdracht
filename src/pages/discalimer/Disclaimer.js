@@ -1,11 +1,13 @@
 import React from 'react';
 import "./Disclaimer.css"
+import Scroll from "../../components/scroll/Scroll";
 
 function Disclaimer() {
     return (
         <main className="outer-content-container-disclaimer">
           <section className="inner-content-container-disclaimer">
             <h1>Disclaimer</h1>
+              {<Scroll/>}
               <article className="content-container-disclaimer1">
            <h5>Copy recipes</h5>
             <p>  Nothing on this website may be copied, made public or reproduced in any way for personal use without the permission of Healthyrecepis.com. A source reference is required after approval and must be clickable for digital media and provide a link to the source file. If you have any questions, please contact me.

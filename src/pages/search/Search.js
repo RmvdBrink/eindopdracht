@@ -16,8 +16,8 @@ import {Link} from "react-router-dom";
 
 
 
-const APP_ID = "08659f69"
-const APP_KEY = "13cd3b413ae7c5546cc09ef8a8590c71"
+const APP_ID = "enter the app id between the brackets"
+const APP_KEY = "enter here between the brackets app key"
 
 function Search() {
 

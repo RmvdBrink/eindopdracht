@@ -1,12 +1,18 @@
 import React from 'react';
 import "./WorkTogether.css"
-
+import Scroll from "../../components/scroll/Scroll";
 function WorkTogether() {
+
+
+
+
+
     return (
         <div>
             <main className="outer-content-container-work">
                 <section className="inner-content-container-work">
                     <h1>Work together</h1>
+                    {<Scroll/>}
                     <article className="content-container-work1">
 
                         <p>Welcome to the "Work Together" page of our healthy recipes site! Are you a nutritionist,
