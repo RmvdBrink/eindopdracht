@@ -6,8 +6,8 @@ import roundCalories from "../../helpers/roundCalories";
 import Loader from "../../components/loader-compenent/LoaderComponent";
 import NotificationTab from "../../components/notification-tab/NotificationTab";
 
-const APP_ID = "0c78e8a1"
-const APP_KEY = "d17f117cd5cfc21bccfac6a9560a352a"
+const APP_ID = "enter the app id between the brackets"
+const APP_KEY = "enter here between the brackets app key"
 
 function Calculator() {
     const [calorie, setCalorie] = useState([]);

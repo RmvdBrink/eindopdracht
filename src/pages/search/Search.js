@@ -16,8 +16,8 @@ import {Link} from "react-router-dom";
 
 
 
-const APP_ID = "08659f69"
-const APP_KEY = "13cd3b413ae7c5546cc09ef8a8590c71"
+const APP_ID = "enter the app id between the brackets"
+const APP_KEY = "enter here between the brackets app key"
 
 function Search() {
 
@@ -160,8 +160,13 @@ function Search() {
                 <h2>Recipes Search page</h2>
                 <p> Find healthy recipes that contributes to your daily life!</p>
                 <p>Welcome to the Recipes Search page, where you can find healthy recipes that contribute to your daily life! As a user, you can always search for recipes using a keyword, but to make use of the full functionality of the page, you will need to log in. </p>
-                    <p> Once logged in, you will have access to search filters for dietary restrictions and allergies, and the ability to save your favorite recipes for easy access later. Enjoy!</p>
-            </div>
+                    <p> Once logged in, you will have access to search filters for dietary restrictions and allergies, and the ability to save your favorite recipes for easy access later.</p>
+                    <p>Enter a product you are looking for and the search engine returns a maximum of twenty recipes if they can be found in our database.</p>
+                    <p>Scroll through the search results looking for great recipes</p>
+                    <p>Found a nice recipe, click on it and a window at the bottom of the page will open with the detailed recipe</p>
+                    <p>Finally, when you are logged in, you can easily save and delete recipes.</p>
+                    <p>Enjoy our wonderful recipes !</p>
+                </div>
             </div>
             <div className="content-container-search1-title-text">
 

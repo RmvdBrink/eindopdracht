@@ -37,7 +37,7 @@ function SignIn() {
                 password: data.password,
             })
 
-            console.log(response)
+
             navigate("/search")
             login(response.data.accessToken)
 

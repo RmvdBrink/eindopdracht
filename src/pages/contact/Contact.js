@@ -1,20 +1,37 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Button from "../../components/button/Button";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import "./Contact.css"
 import "../../App.css"
 import {useForm} from "react-hook-form";
 import InputComponent from "../../components/input component/InputComponent";
-
+import axios from "axios";
+import Scroll from "../../components/scroll/Scroll";
 
 function Contact() {
+
+
 
     const {handleSubmit, formState: {errors}, register} = useForm();
 
 
-    function handleFormSubmit(data) {
-        console.log(data)
+    const navigate = useNavigate();
+
+   async function handleFormSubmit(data) {
+      await axios.post(`https://formsubmit.co/66dbde386355063288d8e9e97e8d6e5c`, data)
+            .then(response => {
+
+                alert('thank you for filling out our contact form we will contact you as soon as possible')
+                navigate("/")
+            })
+            .catch(e => {
+                console.error(e);
+            });
+
+
     }
+
+
 
     return (
         <>
@@ -26,6 +43,7 @@ function Contact() {
 
                         <form onSubmit={handleSubmit(handleFormSubmit)} className="contact-form">
                             <h5><strong>Contact us</strong></h5>
+                            {<Scroll/>}
                             <p>Welcome to our healthy recipes website! If you have any questions or suggestions, </p>
                             <p> please don't hesitate to reach out to us using the contact form below.</p>
                             <p> We are always looking

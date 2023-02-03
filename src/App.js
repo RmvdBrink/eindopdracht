@@ -22,7 +22,7 @@ function App() {
         <>
 
             <Header/>
-            <img className="logo" alt="logo" width="250px" src={Logo}/>
+            <img className="logo" alt="logo"  src={Logo}/>
 
             <Routes>
                 <Route path="/" element={<Home/>}/>

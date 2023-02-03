@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 import "./Faq.css"
+import Scroll from "../../components/scroll/Scroll";
 
 function Faq() {
     return (
@@ -11,6 +12,7 @@ function Faq() {
                 </div>
                 <section className="inner-content-container-faq">
                     <article className="content-container-faq1">
+                        {<Scroll/>}
                         <h3>Frequently Asked Questions</h3>
 
 
